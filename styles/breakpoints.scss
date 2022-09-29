@@ -1,0 +1,36 @@
+$mobile: 425px;
+$tablet: 768px;
+$laptop: 1025px;
+$desktop: 1441px;
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$laptop}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+// Custom devices
+@mixin rwd($screen) {
+  @media (min-width: #{$screen+'px'}) {
+    @content;
+  }
+}

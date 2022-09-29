@@ -1,0 +1,185 @@
+@import "variables.scss";
+@import "breakpoints.scss";
+
+footer {
+  --gap: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--gap);
+
+  padding: 50px 16px 50px;
+
+  color: var(--white);
+  background-color: var(--blue);
+
+  padding-left: var(--header-pading-left, 96px);
+
+  @include md {
+    padding-right: 60px;
+    padding-top: 120px;
+    padding-bottom: 56px;
+    --gap: 40px;
+  }
+
+  @include lg {
+    padding-top: 120px;
+    padding-right: 68px;
+    padding-bottom: 24px;
+  }
+
+  @include xl {
+    padding-top: 120px;
+    padding-right: 96px;
+  }
+  .slogan {
+    max-width: 36ch;
+
+    @include sm {
+      max-width: unset;
+    }
+  }
+  .map {
+    grid-area: map;
+    height: 364px;
+  }
+
+  .section__header {
+    margin-bottom: 16px;
+    padding-top: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1px;
+
+    @include md {
+      font-size: 20px;
+    }
+  }
+
+  // Navigation
+  nav {
+    display: flex;
+    justify-content: space-between;
+
+    @include lg {
+      gap: 48px;
+    }
+
+    .naviation-list {
+      display: flex;
+      gap: 24px;
+
+      @include md {
+        gap: 56px;
+      }
+      @include lg {
+        flex: 7;
+      }
+      .navigation-text {
+        color: var(--white);
+        text-transform: capitalize;
+      }
+    }
+    .slogan {
+      display: none;
+      @include lg {
+        display: block;
+        flex: 3;
+      }
+    }
+  }
+
+  .footer__infomations {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    @include md {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+  }
+
+  .footer__address {
+    grid-area: address;
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+
+    @include md {
+      flex: 7;
+    }
+
+    select {
+      margin-bottom: 16px;
+      padding: 4px 0;
+      display: block;
+      outline: none;
+      color: $white;
+      border: none;
+      border-bottom: 2px solid $white;
+      background: transparent;
+      option {
+        background: transparent;
+        color: $black;
+      }
+    }
+
+    .address__detail {
+      display: none;
+
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    &[data-address-value="binhduong"] .address__detail[data-address-value="binhduong"] {
+      display: block;
+    }
+    &[data-address-value="hochiminh"] .address__detail[data-address-value="hochiminh"] {
+      display: block;
+    }
+    &[data-address-value="bacninh"] .address__detail[data-address-value="bacninh"] {
+      display: block;
+    }
+  }
+
+  .footer__contact {
+    @include lg {
+      flex: 3;
+    }
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      @include md {
+      }
+
+      @include lg {
+        flex-direction: row;
+        column-gap: 40px;
+      }
+    }
+    .contact {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      &__info {
+        font-weight: 400;
+        color: var(--white);
+      }
+    }
+    .contact__icon {
+      display: flex;
+    }
+  }
+
+  .footer__bottom-line {
+    height: 2px;
+    align-self: stretch;
+    // width: calc(100vw - 32px);
+    background-color: white;
+    margin-top: 4px;
+  }
+}

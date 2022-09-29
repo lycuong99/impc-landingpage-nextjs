@@ -1,0 +1,77 @@
+@import "../styles/variables.scss";
+@import "../styles/breakpoints.scss";
+
+.page-piling {
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+
+  :global {
+    .section {
+      min-height: 100vh;
+      min-height: calc(var(--vh, 1vh) * 100);
+      width: 100vw;
+
+      will-change: transform, opacity;
+      @include md {
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+      }
+      @include lg {
+        min-height: 100vh;
+        min-height: calc(var(--vh, 1vh) * 100);
+        z-index: 1;
+        position: absolute !important;
+        top: 0;
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        overflow: hidden;
+      }
+    }
+
+    footer {
+      @include lg {
+        transform: translateY(100vh);
+      }
+    }
+
+    .controller {
+      position: fixed;
+      right: 0;
+      top: 30vh;
+      z-index: 20;
+      display: none;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+
+      @include lg {
+        display: block;
+      }
+
+      background-color: rgba(0, 0, 0, 0.1);
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+
+        li {
+          text-align: center;
+
+          color: $white;
+          padding: 20px 20px;
+
+          transition: all 0.25s ease-in;
+          cursor: pointer;
+
+          &:hover {
+            color: $orange;
+          }
+
+          &.active {
+            color: $orange;
+          }
+        }
+      }
+    }
+  }
+}

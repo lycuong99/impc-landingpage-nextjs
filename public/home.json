@@ -1,0 +1,278 @@
+{
+  "home": {
+    "id": "homepage",
+    "type": "page",
+    "childrens": [
+      {
+        "id": "home-seo",
+        "name": "seo",
+        "fields": [
+          {
+            "name": "title",
+            "type": "text",
+            "value": {
+              "all": "IMP Design and Technical Management Corporation"
+            }
+          },
+          {
+            "name": "metaDescription",
+            "value": {
+              "en": "IMPC is an associated member of Vietnam's leading Group developing industrial parks and townships nationwide.",
+              "vi": "IMPC là thành viên liên kết của Tập đoàn hàng đầu Việt Nam phát triển các khu công nghiệp, khu đô thị trên toàn quốc."
+            }
+          },
+          {
+            "name": "metaKeywords",
+            "value": {
+              "en": "impc, Project and Construction Management, quản lý dự án, quản lí hạ tầng",
+              "vi": "impc, Project and Construction Management, quản lý dự án, quản lí hạ tầng"
+            }
+          },
+          {
+            "name": "ogTitle",
+            "value": {
+              "all": "IMP Design and Technical Management Corporation"
+            }
+          },
+          {
+            "name": "ogImage",
+            "type": "image",
+            "value": {
+              "all": "https://impc.netlify.app/og-img.png"
+            }
+          }
+        ]
+      },
+      {
+        "id": "homepage-banner",
+        "name": "banner",
+        "fields": [
+          {
+            "id": "aaa",
+            "name": "subHeader",
+            "type": "text",
+            "value": {
+              "vi": "YOUR EXPERT",
+              "en": "YOUR EXPERT",
+              "all": "Header"
+            }
+          },
+          {
+            "id": "aaa",
+            "name": "defaultHeader",
+            "type": "text",
+            "value": {
+              "vi": "YOUR EXPERT",
+              "en": "We Provide Solutions And Services In This Area"
+            }
+          },
+          {
+            "id": "aaa",
+            "name": "serviceHeader",
+            "type": "text",
+            "value": {
+              "vi": "YOUR EXPERT",
+              "en": "In the field of industrial development and management"
+            }
+          },
+          {
+            "id": "banner-bg",
+            "name": "background",
+            "type": "image",
+            "value": {
+              "all": "imgUrl"
+            }
+          },
+          {
+            "name": "serviceLink",
+            "value": {
+              "en": "Discover more",
+              "vi": "Khám phá thêm"
+            }
+          },
+          {
+            "name": "contactBtn",
+            "value": {
+              "en": "CONTACT US",
+              "vi": "Liên hệ"
+            }
+          }
+        ],
+        "childrens": [
+          {
+            "name": "bannerServices",
+            "items": [
+              {
+                "name": "planningAndDesign",
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "text",
+                    "value": { "vi": "PLANNING AND DESIGN", "en": "PLANNING & DESIGN" }
+                  },
+                  {
+                    "name": "image",
+                    "type": "image",
+                    "value": { "all": "imgURL" }
+                  }
+                ]
+              },
+              {
+                "name": "permitting",
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "text",
+                    "value": { "vi": "PERMITTING", "en": "PERMITTING" }
+                  },
+                  {
+                    "name": "image",
+                    "type": "image",
+                    "value": { "all": "imgURL" }
+                  }
+                ]
+              },
+              {
+                "name": "project",
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "text",
+                    "value": {
+                      "vi": "PROJECT AND CONSTRUCTION MANAGEMENT",
+                      "en": "PROJECT AND CONSTRUCTION MANAGEMENT"
+                    }
+                  },
+                  {
+                    "name": "image",
+                    "type": "image",
+                    "value": { "all": "imgURL" }
+                  }
+                ]
+              },
+              {
+                "name": "industrial",
+                "fields": [
+                  {
+                    "name": "title",
+                    "type": "text",
+                    "value": {
+                      "vi": "INDUSTRIAL ESTATE MANAGEMENT",
+                      "en": "INDUSTRIAL ESTATE MANAGEMENT"
+                    }
+                  },
+                  {
+                    "name": "image",
+                    "type": "image",
+                    "value": { "all": "imgURL" }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "",
+        "name": "achivement",
+        "fields": [
+          {
+            "name": "title",
+            "type": "text",
+            "value": {
+              "vi": "Quality projects That Create long term Growth",
+              "en": "Quality projects That Create long term Growth"
+            }
+          },
+          {
+            "name": "totalProjectTitle",
+            "type": "text",
+            "value": {
+              "vi": "TOTAL PROJECT",
+              "en": "TOTAL PROJECT"
+            }
+          },
+          {
+            "name": "totalProjectValue",
+            "type": "number",
+            "value": {
+              "vi": "75",
+              "en": "75"
+            }
+          },
+          {
+            "name": "totalProjectUnit",
+            "type": "text",
+            "value": {
+              "vi": "projects",
+              "en": "projects"
+            }
+          },
+          {
+            "name": "totalPartnetAndCustomerTitle",
+            "type": "text",
+            "value": {
+              "vi": "PARTNERS & CUSTOMERS",
+              "en": "PARTNERS & CUSTOMERS"
+            }
+          },
+          {
+            "name": "totalPartnetAndCustomerValue",
+            "type": "number",
+            "value": {
+              "vi": "20",
+              "en": "20"
+            }
+          },
+          {
+            "name": "totalPartnetAndCustomerUnit",
+            "type": "text",
+            "value": {
+              "vi": "companies",
+              "en": "companies"
+            }
+          },
+          {
+            "name": "totalEmployeeTitle",
+            "type": "text",
+            "value": {
+              "vi": "TOTAL EMPLOYEES",
+              "en": "TOTAL EMPLOYEES"
+            }
+          },
+          {
+            "name": "totalEmployeeValue",
+            "type": "number",
+            "value": {
+              "all": 282
+            }
+          },
+          {
+            "name": "totalEmployeeUnit",
+            "type": "text",
+            "value": {
+              "vi": "employees",
+              "en": "employees"
+            }
+          },
+          {
+            "name": "paragraph",
+            "type": "text",
+            "value": {
+              "vi": " Together with our Business Partners and Customers, we deliver quality projects that create long-term growth and higher value creation across the country.",
+              "en": " Together with our Business Partners and Customers, we deliver quality projects that create long-term growth and higher value creation across the country."
+            }
+          },
+          {
+            "name": "portfolioBtn",
+            "type": "text",
+            "value": {
+              "vi": "PORTFOLIO",
+              "en": "PORTFOLIO"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

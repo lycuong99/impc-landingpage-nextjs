@@ -1,0 +1,429 @@
+@import "../styles/variables.scss";
+@import "../styles/breakpoints.scss";
+
+.header {
+  --header-color: var(--black);
+  --hover-color: var(--blue);
+  --logo-color: var(--blue);
+
+  padding: 12px 16px 12px var(--header-pading-left, 96px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  position: fixed;
+  // height: $header-height;
+  z-index: 100;
+  background-color: rgba($color: #fff, $alpha: 0.99);
+
+  transition: all 0.4s ease-in-out;
+
+  @include md {
+    padding: 20px 36px 16px var(--header-pading-left, 96px);
+  }
+
+  &.header--transparent:global {
+    --header-color: var(--white);
+    --hover-color: var(--blue);
+    --logo-color: var(--white);
+    background-color: transparent;
+  }
+  &.header--footer-transparent:global {
+    --header-color: var(--white);
+    --hover-color: var(--orange);
+    --logo-color: var(--white);
+    background-color: transparent;
+  }
+
+  :global {
+    .logo {
+      svg {
+        transition: all 0.8s ease-in-out;
+        color: var(--logo-color);
+        height: 2em;
+        width: 110px;
+        @include md {
+          height: 40px;
+        }
+      }
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 20px;
+
+      @include sm {
+        margin-right: 28px;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        gap: 48px;
+
+        li {
+          position: relative;
+          padding-bottom: 8px;
+          padding-left: 1px;
+          padding-right: 5px;
+
+          transition: all 0.25s ease;
+
+          a {
+            color: var(--header-color);
+          }
+          &.active {
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              // left: 0;
+
+              height: 2px;
+              // width: 0;
+              right: 0;
+              width: 100%;
+
+              background-color: var(--header-color);
+              // transition: all 0.25s ease;
+            }
+
+            &:hover {
+              &::after {
+                background-color: var(--hover-color);
+                height: 2px;
+                // ANIMATION IS DEFINED FROM STYLE.CSS
+                animation-name: bottomline;
+                animation-duration: 0.8s;
+                animation-fill-mode: forwards;
+                animation-timing-function: linear;
+              }
+            }
+          }
+
+          &:hover {
+            a {
+              color: var(--hover-color);
+            }
+          }
+        }
+      }
+    }
+
+    .hamburger {
+      z-index: 5;
+      padding: 0;
+      height: 24px;
+      width: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+
+      transition: all 0.3s ease-in-out;
+      @include md {
+        height: 48px;
+        width: 48px;
+        gap: 8px;
+      }
+      span {
+        height: 2px;
+        width: 100%;
+        background-color: var(--header-color);
+        display: inline-block;
+        transition: all 0.3s ease-in-out;
+        &.bot {
+          width: 80%;
+        }
+      }
+
+      &:hover span {
+        background-color: var(--hover-color);
+      }
+
+      &--close {
+        transform: rotate(45deg);
+
+        span {
+          background-color: var(--white);
+          --lineHamburgerTranslateY: 8px;
+
+          @include md {
+            --lineHamburgerTranslateY: 10px;
+          }
+          &.top {
+            transform: translateY(var(--lineHamburgerTranslateY));
+          }
+          &.bot {
+            -webkit-transform: translateY(calc(-1 * var(--lineHamburgerTranslateY)));
+            -moz-transform: translateY(calc(-1 * var(--lineHamburgerTranslateY)));
+            -ms-transform: translateY(calc(-1 * var(--lineHamburgerTranslateY)));
+            -o-transform: translateY(calc(-1 * var(--lineHamburgerTranslateY)));
+            transform: translateY(calc(-1 * var(--lineHamburgerTranslateY)));
+            width: 100%;
+          }
+          &.middle {
+            transform: rotateZ(90deg);
+          }
+        }
+
+        &:hover {
+          // transform: rotate(315deg);
+          span {
+            background-color: var(--white);
+          }
+        }
+      }
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 4;
+      height: calc(100 * var(--vh, 1vh));
+      width: 100vw;
+      $drawer-color: $white;
+
+      display: grid;
+      justify-content: space-between;
+      justify-items: flex-start;
+      grid-template: "a2 a2" "a1 a1" "a4 a4";
+      grid-template-rows: auto 1fr 32px;
+
+      padding: 120px 24px 5vh;
+
+      opacity: 0;
+      transform: translateX(-100vw);
+
+      background: $blue url("/assets/images/header-bg.png");
+      background-size: cover;
+      // background-blend-mode: overlay;
+
+      &::after {
+        // content: "";
+        z-index: -1;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background: url("/assets/images/pattern02.png");
+        background-repeat: space;
+        background-size: 124px;
+        background-blend-mode: lighten;
+      }
+
+      &::before {
+        content: "";
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, rgba(5, 70, 180, 0.75) 57.97%, rgba(5, 70, 180, 0) 100%);
+      }
+
+      @include md {
+        grid-template: "a1 a2" "a1 a3" "a4 a4";
+        grid-template-rows: auto 1fr 32px;
+
+        padding: 120px var(--header-pading-left, 96px) var(--header-pading-left, 96px)
+          var(--header-pading-left, 96px);
+      }
+
+      .navigation-text-xl {
+        color: $drawer-color;
+      }
+      a.navigation-text-xl {
+        cursor: pointer;
+      }
+
+      .navigation-text-xl:hover {
+        opacity: 0.8;
+      }
+
+      .contact {
+        grid-area: a4;
+        color: $drawer-color;
+
+        align-self: flex-end;
+        justify-self: stretch;
+
+        display: flex;
+        align-items: center;
+        gap: 40px;
+
+        z-index: 2;
+
+        height: 32px;
+
+        padding-bottom: 12px;
+
+        @include lg {
+          gap: 24px;
+        }
+
+        .navigation-text-xl {
+          display: inline-block;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+
+      .slogan {
+        // display: none;
+        .line {
+          height: 30px;
+          overflow: hidden;
+          span {
+            display: inline-block;
+          }
+        }
+        @include md {
+          display: block;
+        }
+      }
+
+      ol {
+        z-index: 2;
+
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        align-items: flex-start;
+
+        grid-area: a1;
+        list-style: none;
+        counter-reset: my-awesome-counter;
+
+        @include lg {
+          gap: 56px;
+        }
+
+        & > li {
+          counter-increment: my-awesome-counter;
+          position: relative;
+          padding-left: 42px;
+
+          @include lg {
+            padding-left: 64px;
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background-color: $drawer-color;
+            opacity: 0.6;
+
+            transition: width 0.25s ease-in;
+          }
+
+          &:hover {
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              height: 2px;
+              width: 100%;
+              background-color: $drawer-color;
+            }
+          }
+        }
+        & > li::before {
+          content: "0" counter(my-awesome-counter);
+          position: absolute;
+          font-family: "Avenir Next";
+          font-size: 24px;
+          left: 0;
+          bottom: 0;
+          color: $drawer-color;
+          font-weight: 600;
+
+          @include md {
+            line-height: 36px;
+          }
+          @include lg {
+            font-size: 32px;
+            line-height: 48px;
+          }
+        }
+
+        & > li.active::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+          background-color: $drawer-color;
+        }
+      }
+
+      .tt {
+        grid-area: a2;
+        color: $drawer-color;
+
+        z-index: 1;
+
+        margin-bottom: 56px;
+
+        font-size: 20px;
+
+        @include lg {
+          font-size: 24px;
+          text-align: right;
+          line-height: 28px;
+        }
+
+        .line {
+          height: 22px;
+
+          @include lg {
+            height: 28px;
+          }
+        }
+      }
+      &__logo {
+        grid-area: a3;
+        align-self: flex-end;
+        justify-self: flex-end;
+        padding-bottom: 20px;
+        display: none;
+
+        @include md {
+          display: block;
+        }
+      }
+
+      &__bottom-line {
+        // position: absolute;
+        height: 2px;
+        flex: 1;
+        // left: var(--header-pading-left, 96px);
+        // right: var(--header-pading-left, 96px);
+        // bottom: var(--header-pading-left, 96px);
+
+        // display: none;
+        background-color: $drawer-color;
+
+        @include md {
+          display: block;
+        }
+      }
+    }
+  }
+}
