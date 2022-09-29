@@ -799,24 +799,26 @@ export default function ServicesPage() {
           <section className="project service-section panel">
             <div className="service-section__header">
               <h2>PROJECT AND CONSTRUCTION MANAGEMENT</h2>
-              <a href="/portfolio/?serviceId=2" className="portfolio-navigation js-link">
-                <h2>PORTFOLIO</h2>
-                <span>
-                  <svg
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 23.4357L23 1.8623M23 1.8623H12.9429M23 1.8623V10.6083"
-                      stroke="#EC8922"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </span>
-              </a>
+              <Link href="/portfolio/?serviceId=2">
+                <a className="portfolio-navigation js-link">
+                  <h2>PORTFOLIO</h2>
+                  <span>
+                    <svg
+                      width="24"
+                      height="25"
+                      viewBox="0 0 24 25"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1 23.4357L23 1.8623M23 1.8623H12.9429M23 1.8623V10.6083"
+                        stroke="#EC8922"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </Link>
             </div>
             <div className="slider service-section__body">
               <div className="slider__images">
