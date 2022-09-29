@@ -327,8 +327,7 @@ const ServiceSection = ({ id, className, children }) => {
     </section>
   );
 };
-
-ServiceSection.Header = ({ headerText, portfolioLink }) => {
+const SectionHeader = ({ headerText, portfolioLink }) => {
   return (
     <div className="service-section__header">
       <h2>{headerText}</h2>
@@ -355,11 +354,13 @@ ServiceSection.Header = ({ headerText, portfolioLink }) => {
     </div>
   );
 };
+ServiceSection.Header = SectionHeader;
 
-ServiceSection.Body = ({ children, className }) => {
+const SectionBody = ({ children, className }) => {
   return <div className={`service-section__body ${className}`}>{children}</div>;
 };
 
+ServiceSection.Body = SectionBody;
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function ServicesPage() {
@@ -903,7 +904,6 @@ export default function ServicesPage() {
           </ServiceSection.Body>
         </ServiceSection>
 
-    
         <ServiceSection className="project scroll-panel">
           <ServiceSection.Header
             headerText={"PROJECT AND CONSTRUCTION MANAGEMENT"}
