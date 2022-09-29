@@ -41,16 +41,12 @@ const Footer = ({ className }) => {
           </li>
           <li>
             <Link href="/services">
-              <a href="/services" className="navigation-text js-link">
-                What we do
-              </a>
+              <a className="navigation-text js-link">What we do</a>
             </Link>
           </li>
           <li>
             <Link href="/portfolio">
-              <a href="/portfolio" className="navigation-text js-link">
-                Portfolio
-              </a>
+              <a className="navigation-text js-link">Portfolio</a>
             </Link>
           </li>
         </ul>
