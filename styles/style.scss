@@ -330,32 +330,36 @@ a {
 }
 
 #scrollTopBtn {
-  display: none;
+  display: block;
 
   position: fixed;
   bottom: 20px;
-  right: 12px;
+  right: 8px;
   z-index: 99;
 
   height: 40px;
   width: 40px;
 
-  padding: 8px 6px;
+  padding: 6px 4px;
 
-  border-radius: 1px;
+  border-radius: 4px;
 
   background-color: var(--orange);
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out;
   will-change: opacity;
 
-  img {
-    height: 100%;
-    width: auto;
+  .img-wrapper {
+  
+
+    img{
+      height: 100%;
+      width: auto;
+    }
   }
 
   @include lg {
-    right: 24px;
+    right: 8px;
 
     height: 60px;
     width: 60px;
