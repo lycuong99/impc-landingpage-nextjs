@@ -241,6 +241,25 @@ const SectionAnimations = {
         }
       );
 
+      let timeoutSlider = setTimeout(() => {
+        if (SectionAnimations.Banner.destroyIntervalSlide) {
+          clearInterval(SectionAnimations.Banner.destroyIntervalSlide);
+          console.log("set interval img", SectionAnimations.Banner.destroyIntervalSlide);
+        }
+
+        SectionAnimations.Banner.destroyIntervalSlide = setInterval(() => {
+          slideBannerImage();
+        }, 2500);
+        console.log("set interval img", SectionAnimations.Banner.destroyIntervalSlide);
+        window.addEventListener(
+          "pagetranstion:unload",
+          () => {
+            clearInterval(SectionAnimations.Banner.destroyIntervalSlide);
+            SectionAnimations.Banner.destroyIntervalSlide = null;
+          },
+          { once: true }
+        );
+      }, 2000);
     },
     out: () => {
       document.getElementById("header").classList.remove(headerStyles["header--transparent"]);
@@ -616,7 +635,6 @@ const SectionAnimations = {
 };
 
 const AchievementSection = ({ pageContent }) => {
-
   const {
     Quote,
     TotalProjectTitle,
@@ -970,7 +988,6 @@ const PartnerSection = ({ content }) => {
 };
 
 const BannerSection = ({ pageContent }) => {
-
   const locale = useRouter().locale;
   const {
     Subheader,
@@ -1095,7 +1112,6 @@ const BannerSection = ({ pageContent }) => {
             />
           </div>
           {HomeBannerServiceSliders.map(({ ImageURL, Title }, index) => {
-
             return (
               <div className="img-wrapper" key={index} data-banner-img-index={index + 1}>
                 <Image
@@ -1153,7 +1169,7 @@ export default function Home({ pageContent }) {
 
   useIsomorphicLayoutEffect(() => {
     SectionAnimations.Banner.preAnimate();
-    
+
     pageTransitionTimeline.afterEnter = SectionAnimations.Banner.animate;
   }, []);
 

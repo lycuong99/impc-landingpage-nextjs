@@ -50,7 +50,7 @@ export default function PortfolioPage({ pageContent, projects }) {
   ];
 
   const [selectedService, setSelectedService] = useState(services[0]);
-  const [isDropdownExpand, setDropdownExpand] = useState(true);
+  const [isDropdownExpand, setDropdownExpand] = useState(false);
   const { pageTransitionTimeline } = useContext(TransitionContext);
 
   const toggleDropdown = () => {
