@@ -614,6 +614,6 @@ export const getStaticProps = async ({ locale }) => {
       pageContent: pageContent,
       projects: projects,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };

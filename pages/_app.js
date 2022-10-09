@@ -1,4 +1,4 @@
-import { createContext,} from "react";
+import { createContext } from "react";
 import "../styles/normalize.css";
 import "../styles/style.scss";
 import { GlobalProvider } from "../contexts/GlobalContext";
@@ -9,7 +9,11 @@ import ContentProvider from "../components/ContentProvider";
 import { fetchFooter, fetchHeader } from "../services";
 export const GlobalContext = createContext({});
 
+import Router from "next/router";
+import { useTransitionFix } from "../hooks/useTransitionFix";
+
 function MyApp({ Component, pageProps, headerContent, footerContent }) {
+  useTransitionFix();
 
   return (
     <GlobalProvider>
@@ -27,7 +31,6 @@ function MyApp({ Component, pageProps, headerContent, footerContent }) {
 MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   let locale = ctx.router.locale || "en";
-
 
   const appProps = await App.getInitialProps(ctx);
 

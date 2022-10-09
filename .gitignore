@@ -36,3 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 pages/test.js
+public/robots.txt
+public/sitemap-0.xml
+public/sitemap.xml
+
