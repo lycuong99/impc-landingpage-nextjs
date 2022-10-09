@@ -15,6 +15,7 @@ const nextConfig = {
   images: {
     domains: [process.env.BASE_URL, process.env.SERVER_URL, "localhost", process.env.SERVER_DOMAIN],
   },
+  output: "standalone",
 };
 
 module.exports = nextConfig;
