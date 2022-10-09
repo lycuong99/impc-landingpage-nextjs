@@ -1,38 +1,27 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Children, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import Footer from "../components/Footer";
 import styles from "../styles/service.module.scss";
 
-import cn from "classnames";
 import Header from "../components/Header";
 import gsap, { Power2, Power3, Power0 } from "gsap";
-// import ScrollTrigger from "gsap/ScrollTrigger";
+
 import ScreenTracking from "../lib/screen-tracking";
 
 import Link from "next/link";
 import headerStyles from "../components/header.module.scss";
-import GlobalContext from "../contexts/GlobalContext";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import ScrollToPlugin from "gsap/dist/ScrollToPlugin";
 import { TransitionContext } from "../components/PageLoader";
+import { splitTextToLines } from "../lib/utils";
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
+import { fetchServicePage } from "../services";
+import Seo from "../components/Seo";
 
-// import LocomotiveScroll from "locomotive-scroll";
 
-// const isMoving = () => {
-//   let currentTime = new Date().getTime();
-//   return currentTime - lastAnimation < 1000;
-// };
-// const updateLastAnimationTime = () => {
-//   let currentTime = new Date().getTime();
-//   lastAnimation = currentTime;
-// };
-// let lastAnimation = 0;
+
+
 const scroller = ".panel-wrapper";
-const ScrollPanel = () => {
-  return <></>;
-};
 
 const ServiceSlider = ({ sliderItems }) => {
   let $slidersElementRef = useRef(null);
@@ -238,25 +227,19 @@ const ServiceSlider = ({ sliderItems }) => {
   return (
     <div className="slider" ref={$slidersElementRef}>
       <div className="slider__images">
-        {sliderItems.map((item, i) => (
-          <div
-            key={item.subHeader}
-            className={`slider__image ${i === 0 ? "active" : ""}`}
-            data-slider-index={i + 1}
-          >
-            <img src={item.imgUrl} loading="lazy" alt="" />
-            <div className="slider__image-overlap"></div>
-          </div>
-        ))}
-        {/* <div className="slider__image active" data-slider-index="1">
-          <img src="/assets/images/services/plan.webp" loading="lazy" alt="" />
-          <div className="slider__image-overlap"></div>
-        </div>
-
-        <div className="slider__image" data-slider-index="2">
-          <img src="/assets/images/services/design.webp" loading="lazy" alt="" />
-          <div className="slider__image-overlap"></div>
-        </div> */}
+        {sliderItems.map((item, i) => {
+    
+          return (
+            <div
+              key={item.Subheader}
+              className={`slider__image ${i === 0 ? "active" : ""}`}
+              data-slider-index={i + 1}
+            >
+              <img src={item.Image?.url} loading="lazy" alt="" />
+              <div className="slider__image-overlap"></div>
+            </div>
+          );
+        })}
       </div>
 
       <div className="slider__wrapper-content">
@@ -264,7 +247,7 @@ const ServiceSlider = ({ sliderItems }) => {
           <div className="slider__counter">
             <span className="counter-index">1</span>
             <span>/</span>
-            <span>2</span>
+            <span>{sliderItems.length}</span>
           </div>
           <div className="slider__nav">
             <button className="prev" onClick={handlePrevClick}>
@@ -305,13 +288,13 @@ const ServiceSlider = ({ sliderItems }) => {
         <div className="slider__contents">
           {sliderItems.map((item, i) => (
             <div
-              key={item.subHeader}
+              key={item.Subheader}
               className={`slider__content ${i == 0 ? "active" : 1}`}
               data-slider-index={i + 1}
             >
-              <div className="sub-header2">{item.subHeader}</div>
-              <h2>{item.header}</h2>
-              <p>{item.paragraph}</p>
+              <div className="sub-header2">{item.Subheader}</div>
+              <h2>{item.Header}</h2>
+              <p>{item.Description}</p>
             </div>
           ))}
         </div>
@@ -327,6 +310,7 @@ const ServiceSection = ({ id, className, children }) => {
     </section>
   );
 };
+
 const SectionHeader = ({ headerText, portfolioLink }) => {
   return (
     <div className="service-section__header">
@@ -363,10 +347,19 @@ const SectionBody = ({ children, className }) => {
 ServiceSection.Body = SectionBody;
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-export default function ServicesPage() {
+export default function ServicesPage({ pageContent }) {
   const { pageTransitionTimeline } = useContext(TransitionContext);
   let scrollTriggerRef = useRef(null);
-  useLayoutEffect(() => {
+  const handleScroll = () => {
+    let condition = scrollTriggerRef?.current.scrollTop > 50;
+    if (!condition) {
+      document.querySelector("#header").classList.add(headerStyles["header--transparent"]);
+    } else {
+      document.querySelector("#header").classList.remove(headerStyles["header--transparent"]);
+    }
+  };
+
+  useIsomorphicLayoutEffect(() => {
     window.scrollTo({
       top: 0,
     });
@@ -398,16 +391,10 @@ export default function ServicesPage() {
           overwrite: true,
         });
       }
-      document.querySelector(".panel-wrapper").addEventListener("scroll", () => {
-        let condition =
-          document.querySelector(".panel-wrapper").scrollTop > 50 ||
-          document.querySelector(".panel-wrapper").scrollTop > 50;
-        if (!condition) {
-          document.querySelector("#header").classList.add(headerStyles["header--transparent"]);
-        } else {
-          document.querySelector("#header").classList.remove(headerStyles["header--transparent"]);
-        }
-      });
+
+      let $panelWrapper = document.querySelector(".panel-wrapper");
+
+      $panelWrapper.addEventListener("scroll", handleScroll);
 
       gsap.utils.toArray(".scroll-panel").forEach((panel, i) => {
         ScrollTrigger.create({
@@ -432,6 +419,7 @@ export default function ServicesPage() {
     }
 
     return () => {
+      scrollTriggerRef?.current.removeEventListener("scroll", handleScroll);
       if (ScreenTracking.isOnLaptop()) {
         let triggers = ScrollTrigger.getAll();
         triggers.forEach((trigger) => {
@@ -655,6 +643,7 @@ export default function ServicesPage() {
     animateForSectionHeader("plan-and-design");
     animateForSliderAppear("plan-and-design");
   };
+
   const animateForFooter = () => {
     gsap.set("footer .naviation-list li", {
       opacity: 0,
@@ -754,70 +743,152 @@ export default function ServicesPage() {
     animateForContentAppear("industrial");
   };
 
+  const content = {
+    banner: {
+      paragraph:
+        "Given the dramatic increase in Industrial Development Investors, we understand the opportunities, as well as the great demand and concerns of these potential clients in consulting and providing services during the planning and development phase of their projects.",
+      backgroudImgURL: "/assets/images/services/service-banner.webp",
+    },
+    planAndDesign: {
+      header: "PLANNING AND DESIGN",
+      sliderItems: [
+        {
+          imgUrl: "/assets/images/services/plan.webp",
+          subHeader: "PLANNING",
+          header:
+            "A team of elite planners, architects, economists, and former policymakers provides our top-notch planning service.",
+          paragraph: `IMPC provides a holistic and integrated approach to economic growth, climate adaptation, infrastructure investment, and land use management as a specialized and
+innovative planning agency.`,
+        },
+        {
+          imgUrl: "/assets/images/services/design.webp",
+          subHeader: "DESIGN",
+          header:
+            "A team of elite planners, architects, economists, and former policymakers provides our top-notch planning service.",
+          paragraph: `A team of architects and engineers with extensive experience in architecture,
+infrastructure, structures, M&E, and fire protection. Deep experience in the legal
+aspects of industrial construction projects, and always up to date on national laws
+and local regulations.`,
+        },
+      ],
+    },
+    permitting: {
+      header: "PERMITTING",
+      header2:
+        "Construction-related permitting services are initiated at an early stage of the project.",
+      paragraph:
+        "IMPC is an Industrial Estate Management service provider with experience in managing facility services that can drive and demonstrate a significant reduction in the cost of operating the facility while maintaining or improving the quality and level of Investor service.",
+      imgURL: "/assets/images/services/permitting.webp",
+    },
+    projectAndConstruct: {
+      header: "PROJECT AND CONSTRUCTION MANAGEMENT",
+      sliderITems: [
+        {
+          imgUrl: "/assets/images/services/project.webp",
+          subHeader: "PROJECT MANAGEMENT",
+          header: "IMPC work closely with our customers.",
+          paragraph: `Throughout the project planning and development phase, we work closely with our
+            customers to deliver projects of cost and quality efficiency.`,
+        },
+        {
+          imgUrl: "/assets/images/services/construction.webp",
+          subHeader: "CONSTRUCTION MANAGEMENT",
+          header: "Construction quality control and supervision.",
+          paragraph: `IMPC provides hands-on construction project management services to our customers
+            by deploying quality resources to meet the demands of each customer to deliver
+            quality buildings and properties. We focus on controlling the project’s time,
+            cost, and quality.`,
+        },
+      ],
+    },
+    industrial: {
+      header: "INDUSTRIAL ESTATE MANAGEMENT",
+      header2: `Experience in \n managing facility services`,
+      paragraph:
+        "IMPC is an Industrial Estate Management service provider with experience in managing facility services that can drive and demonstrate a significant reduction in the cost of  the facility while maintaining or improving the quality and level of Investor service.",
+      imgURL: "/assets/images/services/industrial.webp",
+    },
+  };
+
+  let BannerHeader = `OUR **SERVICES**
+**SOLUTION** FOR
+YOUR BUSINESS`;
+
+  let HeaderRender = ({ header }) => {
+    let isContinuteToNextLine = false;
+    const FORMAT_CHAR = "**";
+
+    let result = splitTextToLines(header).map((line) => {
+      let start = 0;
+      start = line.indexOf(FORMAT_CHAR);
+
+      let newLine = line;
+
+      if (isContinuteToNextLine) {
+        newLine = `<span class="secondary-color">` + newLine;
+      }
+      while (start >= 0) {
+        if (isContinuteToNextLine) {
+          newLine = newLine.replace(FORMAT_CHAR, "</span>");
+          isContinuteToNextLine = false;
+
+          start = line.indexOf(FORMAT_CHAR, start + 1);
+
+          if (start < 0) break;
+          continue;
+        } else {
+          newLine = newLine.replace(FORMAT_CHAR, `<span class="secondary-color">`);
+        }
+
+        let end = line.indexOf(FORMAT_CHAR, start + 1);
+        if (end < 0) {
+          newLine = newLine + "</span>";
+          isContinuteToNextLine = true;
+          break;
+        } else {
+          isContinuteToNextLine = false;
+          newLine = newLine.replace(FORMAT_CHAR, "</span>");
+          start = line.indexOf(FORMAT_CHAR, end + 1);
+        }
+      }
+
+      return `<div class="line">${newLine}</div>`;
+    });
+
+    return <div dangerouslySetInnerHTML={{ __html: result.join("") }}></div>;
+  };
+
   return (
     <div
       className={styles.page}
       // className="smooth-scroll"
       data-scroll-container
     >
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta charSet="utf-8" name="keywords" content="IMPC" />
-        <title>IMPC - Homepage</title>
-        <meta name="title" content="IMP Design and Technical Management Corporation" />
-        <meta
-          name="description"
-          content="IMPC is an associated member of Vietnam's leading Group developing industrial parks and townships nationwide."
-        />
-        <meta
-          name="keywords"
-          content="impc, Project and Construction Management, quản lý dự án, quản lí hạ tầng"
-        />
-        <meta name="robots" content="index, archive" />
-        {/* OG */}
-        <meta property="og:title" content="IMP Design and Technical Management Corporation" />
-        <meta property="og:url" content="https://impc.netlify.app/" />
-        <meta property="og:type" content="website" />
-
-        <meta property="og:site_name" content="IMPC" />
-        <meta
-          property="og:description"
-          content="IMPC is an associated member of Vietnam's leading Group developing industrial parks and townships nationwide."
-        />
-        <meta property="og:image:url" content="https://impc.netlify.app/og-img.png" />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="500" />
-        <meta property="og:image:height" content="300" />
-        <link
-          rel="sitemap"
-          type="application/xml"
-          title="sitemap"
-          href="https://impc.netlify.app/sitemap.xml"
-        />
-      </Head>
+      <Seo Seo={pageContent.Seo} />
 
       <Header />
+
       <main className="panel-wrapper" ref={scrollTriggerRef}>
         <section className="banner scroll-panel">
           <div className="banner__background">
             <img
               className="lazy-img"
               // src="/assets/images/services/service-banner_lazy.webp"
-              src="/assets/images/services/service-banner.webp"
+              src={pageContent.ServiceBanner.BackgroundImage.url}
               alt="Banner background"
             />
           </div>
           <div className="section__wrapper">
             <div className="banner__title">
               <h1>
-                <div>
+                <HeaderRender header={pageContent.ServiceBanner.Header} />
+                {/* <div>
                   OUR <span className="secondary-color">SERVICES</span>
                 </div>
                 <div>
                   <span className="secondary-color">SOLUTION</span> FOR
                 </div>
-                <div>YOUR BUSINESS</div>
+                <div>YOUR BUSINESS</div> */}
               </h1>
             </div>
             <div className="banner__content">
@@ -836,12 +907,7 @@ export default function ServicesPage() {
                 </svg>
               </div>
               <div className="banner__paragraphs">
-                <p>
-                  Given the dramatic increase in Industrial Development Investors, we understand the
-                  opportunities, as well as the great demand and concerns of these potential clients
-                  in consulting and providing services during the planning and development phase of
-                  their projects.
-                </p>
+                <p>{pageContent.ServiceBanner.Description}</p>
               </div>
             </div>
           </div>
@@ -849,100 +915,65 @@ export default function ServicesPage() {
 
         <ServiceSection id="planAndDesign" className="plan-and-design scroll-panel">
           <ServiceSection.Header
-            headerText={"PLANNING AND DESIGN"}
+            headerText={pageContent.PlanningAndDesign.Header}
             portfolioLink={"/portfolio/?serviceId=0"}
           ></ServiceSection.Header>
           <ServiceSection.Body>
-            <ServiceSlider
-              sliderItems={[
-                {
-                  imgUrl: "/assets/images/services/plan.webp",
-                  subHeader: "PLANNING",
-                  header:
-                    "A team of elite planners, architects, economists, and former policymakers provides our top-notch planning service.",
-                  paragraph: `IMPC provides a holistic and integrated approach to economic growth, climate adaptation, infrastructure investment, and land use management as a specialized and
-        innovative planning agency.`,
-                },
-                {
-                  imgUrl: "/assets/images/services/design.webp",
-                  subHeader: "DESIGN",
-                  header:
-                    "A team of elite planners, architects, economists, and former policymakers provides our top-notch planning service.",
-                  paragraph: `A team of architects and engineers with extensive experience in architecture,
-      infrastructure, structures, M&E, and fire protection. Deep experience in the legal
-      aspects of industrial construction projects, and always up to date on national laws
-      and local regulations.`,
-                },
-              ]}
-            ></ServiceSlider>
+            <ServiceSlider sliderItems={pageContent.PlanningAndDesign.SliderItems}></ServiceSlider>
           </ServiceSection.Body>
         </ServiceSection>
 
         <ServiceSection id="permitting" className="permitting scroll-panel">
           <ServiceSection.Header
-            headerText={"PERMITTING"}
+            headerText={pageContent.Permitting.Header}
             portfolioLink={"/portfolio/?serviceId=1"}
           ></ServiceSection.Header>
           <ServiceSection.Body className="service-section__container">
             <div className="service__image left">
-              <img src="/assets/images/services/permitting.webp" loading="lazy" alt="permitting" />
+              <img
+                src={pageContent.Permitting.Content.Image?.url}
+                loading="lazy"
+                alt="permitting"
+              />
             </div>
             <div className="service-section__content">
               <div className="background bg-lazy"></div>
-              <div className="sub-header2">PERMITTING</div>
+              <div className="sub-header2">{pageContent.Permitting.Content.Subheader}</div>
               <h2>
-                Construction-related permitting services are initiated at an early stage of the
-                project.
+                {splitTextToLines(pageContent.Permitting.Content.Header).map((line) => (
+                  <div className="line" key={line}>
+                    <span>{line}</span>
+                  </div>
+                ))}
               </h2>
 
-              <p>
-                IMPC permitting services will provide investors with a big picture of all related
-                works and effects to their projects, allowing them to recognize and plan a good
-                arrangement for their projects.
-              </p>
+              <p>{pageContent.Permitting.Content.Description}</p>
             </div>
           </ServiceSection.Body>
         </ServiceSection>
 
         <ServiceSection className="project scroll-panel">
           <ServiceSection.Header
-            headerText={"PROJECT AND CONSTRUCTION MANAGEMENT"}
+            headerText={pageContent.ProjectAndConstructionManagement.Header}
             portfolioLink={"/portfolio/?serviceId=2"}
           ></ServiceSection.Header>
           <ServiceSection.Body>
             <ServiceSlider
-              sliderItems={[
-                {
-                  imgUrl: "/assets/images/services/project.webp",
-                  subHeader: "PROJECT MANAGEMENT",
-                  header: "IMPC work closely with our customers.",
-                  paragraph: `Throughout the project planning and development phase, we work closely with our
-                    customers to deliver projects of cost and quality efficiency.`,
-                },
-                {
-                  imgUrl: "/assets/images/services/construction.webp",
-                  subHeader: "CONSTRUCTION MANAGEMENT",
-                  header: "Construction quality control and supervision.",
-                  paragraph: `IMPC provides hands-on construction project management services to our customers
-                    by deploying quality resources to meet the demands of each customer to deliver
-                    quality buildings and properties. We focus on controlling the project’s time,
-                    cost, and quality.`,
-                },
-              ]}
+              sliderItems={pageContent.ProjectAndConstructionManagement.SliderItems}
             ></ServiceSlider>
           </ServiceSection.Body>
         </ServiceSection>
 
         <ServiceSection id="industrial" className="industrial scroll-panel">
           <ServiceSection.Header
-            headerText={"INDUSTRIAL ESTATE MANAGEMENT"}
+            headerText={pageContent.IndustrialEstateManagement.Header}
             portfolioLink={"/portfolio/?serviceId=3"}
           ></ServiceSection.Header>
           <ServiceSection.Body>
             <div className="service-section__container service-section__container--reverse">
               <div className="service__image">
                 <img
-                  src="/assets/images/services/industrial.webp"
+                  src={pageContent.IndustrialEstateManagement.Content.Image?.url}
                   loading="lazy"
                   height="100%"
                   width="100%"
@@ -951,22 +982,18 @@ export default function ServicesPage() {
               </div>
               <div className="service-section__content">
                 <div className="background bg-lazy"></div>
-                <div className="sub-header2">INDUSTRIAL ESTATE MANAGEMENT</div>
+                <div className="sub-header2">{content.industrial.header}</div>
                 <h2>
-                  <div className="line">
-                    <span>Experience in </span>
-                  </div>
-                  <div className="line">
-                    <span> managing facility services </span>
-                  </div>
+                  {splitTextToLines(pageContent.IndustrialEstateManagement.Content.Header).map(
+                    (line) => (
+                      <div className="line" key={line}>
+                        <span>{line}</span>
+                      </div>
+                    )
+                  )}
                 </h2>
 
-                <p>
-                  IMPC is an Industrial Estate Management service provider with experience in
-                  managing facility services that can drive and demonstrate a significant reduction
-                  in the cost of operating the facility while maintaining or improving the quality
-                  and level of Investor service.
-                </p>
+                <p>{pageContent.IndustrialEstateManagement.Content.Description}</p>
               </div>
             </div>
           </ServiceSection.Body>
@@ -979,3 +1006,14 @@ export default function ServicesPage() {
     </div>
   );
 }
+
+export const getStaticProps = async ({ locale }) => {
+  const pageContent = await fetchServicePage(locale);
+
+  return {
+    props: {
+      pageContent,
+    },
+    revalidate: 1,
+  };
+};

@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
-
+import { createContext, useState } from "react";
 const TransitionContext = createContext(null);
 
 const pageTransitionTimeline_init = {
@@ -13,10 +12,6 @@ const PageTransitionProvider = ({ children }) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   const [afterEnter, setAfterEnter] = useState();
   const [pageTransitionTimeline, setPageTransitionTimeline] = useState(pageTransitionTimeline_init);
-
-  useLayoutEffect(() => {
-    console.log("update after enter", pageTransitionTimeline);
-  }, [pageTransitionTimeline]);
 
   return (
     <TransitionContext.Provider

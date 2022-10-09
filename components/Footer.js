@@ -1,62 +1,51 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { splitTextToLines } from "../lib/utils";
+import { ContentContext } from "./ContentProvider";
 import styles from "./footer.module.scss";
 
-const companyLocations = [
-  {
-    key: "binhduong",
-    name: "Binh Duong Office",
-    detail:
-      "F6, Partview Tower, No. 5A Huu Nghi Boulevard, Vsip II, Binh Hoa W., Thuan An Town, Binh Duong",
-    locationSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1958.7590491075152!2d106.71690150058227!3d10.924181399312445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d762036ffedd%3A0x3771a8ff3909ee89!2sParkview%20Office%20Building!5e0!3m2!1sen!2s!4v1572244221288!5m2!1sen!2s",
-  },
-  {
-    key: "hochiminh",
-    name: "Headquarters - Ho Chi Minh City",
-    detail: "No.15, D2 Street, Saigon Pearl Complex,Ward 22, Binh Thanh District, Ho Chi Minh City",
-    locationSrc:
-      "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d244.95445589293462!2d106.7183955!3d10.7905215!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a9d54b99bb%3A0xd10e519488eed2cf!2sAVIVA%20SAIGON%20PEARL!5e0!3m2!1sen!2s!4v1630056414578!5m2!1sen!2s",
-  },
-  {
-    key: "bacninh",
-    name: "Bac Ninh Office",
-    detail: "SH03 Catalyst, No. 1, Huu Nghi road, VSIP Bac Ninh, Phu Chan , Tu Son, Bac Ninh",
-    locationSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7445.335295959954!2d105.96474100000002!3d21.083279999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a806ad0bad3d%3A0x7edf83bb25d6aebb!2zMSDEkMaw4budbmcgSOG7r3UgTmdo4buLLCBQaMO5IENo4bqpbiwgVOG7qyBTxqFuLCBC4bqvYyBOaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2sus!4v1564376314103!5m2!1sen!2sus",
-  },
-];
-
 const Footer = ({ className }) => {
-  const [addressSelected, setAddressSelected] = useState(companyLocations[0]);
+  const {
+    footerContent: { CompanyLocations, CompanyName, Email, Phone, Navigation, ContactTitle },
+  } = useContext(ContentContext);
+
+  const [addressSelected, setAddressSelected] = useState(CompanyLocations[0]);
+
+  useEffect(() => {}, [addressSelected]);
 
   return (
     <footer id="footer" className={`${styles.footer} ${className}`}>
       <nav aria-label="navigation in footer">
         <ul className="naviation-list">
-          <li>
-            <Link href="/">
-              <a className="navigation-text">Home</a>
+          <li key={Navigation.HomepageURL}>
+            <Link href={Navigation.HomepageURL}>
+              <a className="navigation-text">{Navigation.HomepageTitle}</a>
             </Link>
           </li>
-          <li>
-            <Link href="/services">
-              <a className="navigation-text js-link">What we do</a>
+          <li key={Navigation.ServiceURL}>
+            <Link href={Navigation.ServiceURL}>
+              <a className="navigation-text">{Navigation.ServiceTitle}</a>
             </Link>
           </li>
-          <li>
-            <Link href="/portfolio">
-              <a className="navigation-text js-link">Portfolio</a>
+          <li key={Navigation.PortfolioURL}>
+            <Link href={Navigation.PortfolioURL}>
+              <a className="navigation-text">{Navigation.PortfolioTitle}</a>
             </Link>
           </li>
         </ul>
 
-        <div className="slogan"> IMP DESIGN AND TECHNCIAL MANAGEMENT CORPORATION </div>
+        <div className="slogan">
+          {splitTextToLines(CompanyName).map((line) => (
+            <div className="line" key={line}>
+              <span>{line}</span>
+            </div>
+          ))}
+        </div>
       </nav>
 
       <div className="footer__infomations">
         <section className="footer__contact">
-          <div className="section__header">Contact</div>
+          <div className="section__header">{ContactTitle}</div>
           <div className="contacts">
             <div className="contact">
               <span className="contact__icon mobile">
@@ -73,7 +62,7 @@ const Footer = ({ className }) => {
                   />
                 </svg>
               </span>
-              <span className="contact__info body-text">+84 28 77703399</span>
+              <span className="contact__info body-text">{Phone}</span>
             </div>
             <div className="contact">
               <span className="contact__icon mobile">
@@ -97,41 +86,43 @@ const Footer = ({ className }) => {
                   </defs>
                 </svg>
               </span>
-              <span className="contact__info body-text">contact@impc.vn</span>
+              <span className="contact__info body-text">{Email}</span>
             </div>
           </div>
         </section>
 
-        {companyLocations && (
+        {CompanyLocations && (
           <section className="footer__address" data-address-value="binhduong">
             <select
               name="address"
-              // defaultValue={companyLocations[0].key}
-              value={addressSelected.key}
+              value={addressSelected?.id}
               id="addressSelect"
               title="Address dropdown"
               onChange={(e) => {
-                setAddressSelected(companyLocations.filter((c) => c.key === e.target.value)?.[0]);
+                CompanyLocations.filter((c) => {
+                  return c.id == e.target.value;
+                });
+                setAddressSelected(CompanyLocations.filter((c) => c.id == e.target.value)?.[0]);
               }}
             >
-              {companyLocations.map((location) => (
-                <option key={location.key} value={location.key}>
-                  {location.name}
+              {CompanyLocations.map(({ LocationURL, id, OfficeName, Address }) => (
+                <option key={id} value={id}>
+                  {OfficeName}
                 </option>
               ))}
             </select>
 
-            <span className="address__detail body-text">{addressSelected.detail}</span>
+            <span className="address__detail body-text">{addressSelected?.Address}</span>
           </section>
         )}
       </div>
 
       <div className="map">
-        {companyLocations && (
+        {CompanyLocations && (
           <iframe
             id="map-iframe"
             title="map"
-            src={addressSelected.locationSrc}
+            src={addressSelected?.LocationURL}
             width="100%"
             loading="lazy"
             height="100%"
@@ -142,7 +133,7 @@ const Footer = ({ className }) => {
       </div>
 
       <div>
-        <div className="slogan mobile"> IMP DESIGN AND TECHNCIAL MANAGEMENT CORPORATION </div>
+        <div className="slogan mobile">{CompanyName}</div>
         <div className="footer__bottom-line"></div>
       </div>
     </footer>

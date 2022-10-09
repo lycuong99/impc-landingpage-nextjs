@@ -1,17 +1,12 @@
-import styles from "./page-loader.module.scss";
 import gsap, { Power3, Power1, Power0 } from "gsap";
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { TransitionContext } from "./PageLoader";
-
+import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 const PageTransitionLayout = ({ children }) => {
   const [displayChildren, setDisplayChildren] = useState(children);
   const {
-    preExit,
-    afterExit,
     isFirstLoading,
     setFirstLoading,
-    afterEnter,
-    setLoadingComplete,
     pageTransitionTimeline,
   } = useContext(TransitionContext);
 
@@ -88,7 +83,7 @@ const PageTransitionLayout = ({ children }) => {
         gsap.set("html", { clearProps: "all" });
 
         if (onComplete && typeof onComplete === "function") {
-          console.log("complete First load");
+
           onComplete();
         }
       },
@@ -120,11 +115,11 @@ const PageTransitionLayout = ({ children }) => {
     });
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setTimeout(() => {
-    //   pageTransitionTimeline.beforeEnter();
+      
       firstLoading(() => {
-        console.log("FIRST LOADING COMPLETE");
+   
         // setLoadingComplete(true);
 
         pageTransitionTimeline.afterEnter();
@@ -133,17 +128,17 @@ const PageTransitionLayout = ({ children }) => {
     }, 150);
   }, []);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (children !== displayChildren) {
       //run animation outtro
 
       if (isFirstLoading) {
         setDisplayChildren(children);
       } else {
-        console.log("Open loader");
+  
         openLoading($jsLoading.current).then(() => {
           setDisplayChildren(children);
-          console.log("close loader");
+       
           //   pageTransitionTimeline.beforeEnter();
           closeLoading().then(() => {
             pageTransitionTimeline.afterEnter();

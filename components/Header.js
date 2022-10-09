@@ -4,11 +4,17 @@ import styles from "./header.module.scss";
 import gsap, { Power2 } from "gsap";
 import { GlobalContext } from "../contexts/GlobalContext";
 import { useRouter } from "next/router";
+import { ContentContext } from "./ContentProvider";
+import { splitTextToLines } from "../lib/utils";
 
 const Header = () => {
-  let $header = useRef(null);
-  let $hamburgerBtn = null;
+  const {
+    headerContent: { CompanyName, Navigation, ContactTitle },
+  } = useContext(ContentContext);
+
   let $navDrawer = null;
+
+  const { locale } = useRouter();
 
   const router = useRouter();
 
@@ -195,7 +201,7 @@ const Header = () => {
   }, [isOpenDrawer]);
 
   return (
-    <header ref={(el) => ($header = el)} id="header" className={`${styles.header} `}>
+    <header id="header" className={`${styles.header} `}>
       <div className="logo">
         <Link href="/">
           <a className="js-link">
@@ -234,9 +240,9 @@ const Header = () => {
       <nav className="header-navigation" aria-label="Navigation bar">
         <ul>
           <li className="active">
-            <a href="#" className="navigation-text">
-              EN
-            </a>
+            <Link href="#" locale={locale === "en" ? "vi" : "en"}>
+              <a className="navigation-text">{locale === "en" ? "VI" : "EN"}</a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -250,36 +256,34 @@ const Header = () => {
       >
         <ol>
           <li className="active">
-            <Link href={"/"}>
+            <Link href={Navigation.HomepageURL}>
               <a className="navigation-text-xl">
-                <span>ABOUT US</span>
+                <span>{Navigation.HomepageTitle}</span>
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/services">
+            <Link href={Navigation.ServiceURL}>
               <a className="navigation-text-xl js-link">
-                {" "}
-                <span>WHAT WE DO</span>
+                <span>{Navigation.ServiceTitle}</span>
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/portfolio">
+            <Link href={Navigation.PortfolioURL}>
               <a className="navigation-text-xl js-link">
-                <span>PORTFOLIO</span>
+                <span>{Navigation.PortfolioTitle}</span>
               </a>
             </Link>
           </li>
         </ol>
 
         <div className="tt">
-          <div className="line">
-            <span>IMP DESIGN AND TECHNICAL</span>
-          </div>
-          <div className="line">
-            <span>MANAGEMENT CORPORATION</span>
-          </div>
+          {splitTextToLines(CompanyName).map((line) => (
+            <div className="line" key={line}>
+              <span>{line}</span>
+            </div>
+          ))}
         </div>
 
         <span className="drawer__logo">
@@ -304,16 +308,15 @@ const Header = () => {
         </span>
 
         <div className="contact">
-          <span className="navigation-text-xl js-scroll-to-footer js-close-drawer">CONTACT</span>
+          <span className="navigation-text-xl js-scroll-to-footer js-close-drawer">
+            {ContactTitle}
+          </span>
           <div className="drawer__bottom-line"></div>
         </div>
       </div>
 
       <button
         id="hamburger"
-        ref={(el) => {
-          $hamburgerBtn = el;
-        }}
         onClick={() => {
           handleHamburgerBtnClick();
         }}
