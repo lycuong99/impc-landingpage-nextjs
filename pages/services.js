@@ -18,6 +18,7 @@ import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { fetchServicePage } from "../services";
 import Seo from "../components/Seo";
 import GlobalContext from "../contexts/GlobalContext";
+import { useRouter } from "next/router";
 
 const scroller = ".panel-wrapper";
 
@@ -865,7 +866,7 @@ YOUR BUSINESS`;
 
     return <div dangerouslySetInnerHTML={{ __html: result.join("") }}></div>;
   };
-
+  const locale = useRouter().locale;
   return (
     <div
       className={styles.page}
@@ -888,7 +889,7 @@ YOUR BUSINESS`;
           </div>
           <div className="section__wrapper">
             <div className="banner__title">
-              <h1>
+              <h1 style={locale === "vi" ? { "--lh-xs": 1.3 } : undefined}>
                 <HeaderRender header={pageContent.ServiceBanner.Header} />
                 {/* <div>
                   OUR <span className="secondary-color">SERVICES</span>
