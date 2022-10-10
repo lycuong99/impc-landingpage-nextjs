@@ -3228,7 +3228,7 @@ const fetchHomepage = async (locale) => {
         ),
       },
     };
-    console.log("1", data.HomePartnerCustomer.CustomersPartnersList);
+    // console.log("1", data.HomePartnerCustomer.CustomersPartnersList);
     data.Seo.MetaImage.url = getMediaURL(data.Seo.MetaImage.url);
 
     return data;
@@ -3267,7 +3267,7 @@ const fetchServicePage = async (locale) => {
     );
 
     responseData.ProjectAndConstructionManagement.SliderItems =
-      responseData.PlanningAndDesign.SliderItems.map((item) => ({
+      responseData.ProjectAndConstructionManagement.SliderItems.map((item) => ({
         ...item,
         Image: {
           // ...item.Image,
@@ -3279,9 +3279,10 @@ const fetchServicePage = async (locale) => {
       responseData.IndustrialEstateManagement.Content.Image.data.attributes.url
     );
     responseData.Seo.MetaImage.url = getMediaURL(responseData.Seo.MetaImage.url);
-    console.log("1", responseData);
+    // console.log("1", responseData);
     return responseData;
   } catch (error) {
+    console.error(error);
     return DEFAUL_SERVICEPAGE_DATA;
   }
 };
@@ -3326,7 +3327,7 @@ const fetchProjects = async () => {
         },
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
     return response.data.data;
   } catch (error) {
     console.log(error);

@@ -244,7 +244,7 @@ const SectionAnimations = {
       let timeoutSlider = setTimeout(() => {
         if (SectionAnimations.Banner.destroyIntervalSlide) {
           clearInterval(SectionAnimations.Banner.destroyIntervalSlide);
-          console.log("set interval img", SectionAnimations.Banner.destroyIntervalSlide);
+          // console.log("set interval img", SectionAnimations.Banner.destroyIntervalSlide);
         }
 
         SectionAnimations.Banner.destroyIntervalSlide = setInterval(() => {
@@ -263,7 +263,7 @@ const SectionAnimations = {
     },
     out: () => {
       document.getElementById("header").classList.remove(headerStyles["header--transparent"]);
-      console.log("Remove slider");
+      // console.log("Remove slider");
       if (SectionAnimations.Banner.destroyIntervalSlide) {
         clearInterval(SectionAnimations.Banner.destroyIntervalSlide);
         SectionAnimations.Banner.destroyIntervalSlide = null;

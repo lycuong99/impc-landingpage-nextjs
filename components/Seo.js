@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 const Seo = ({Seo}) => {
-  console.log(Seo);
+  // console.log(Seo);
   return (
     <Head>
       <meta charSet="utf-8" name="keywords" content="IMPC" />
