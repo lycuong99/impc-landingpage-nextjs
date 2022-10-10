@@ -23,7 +23,7 @@
         padding-left: var(--header-pading-left, 96px);
         padding-right: 16px;
         padding-top: 48px;
-        padding-bottom: 32px;
+        padding-bottom: 48px;
 
         @media (max-width: #{$tablet}) {
           &.banner {
