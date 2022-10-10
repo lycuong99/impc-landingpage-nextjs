@@ -351,10 +351,13 @@ a {
 
   .img-wrapper {
   
-
+    height: 90%; 
+    // bottom: 12px;
+    position: relative;
     img{
       height: 100%;
       width: auto;
+    
     }
   }
 
