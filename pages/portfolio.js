@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import gsap, { Power1, Power2, Sine } from "gsap";
 import screenTracking from "../lib/screen-tracking";
 
-
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { TransitionContext } from "../components/PageLoader";
 import { splitTextToLines } from "../lib/utils";
@@ -15,6 +14,7 @@ import { fetchPortfoliPage, fetchProjects } from "../services";
 import { getMediaURL } from "../lib/api";
 import { useRouter } from "next/router";
 import Seo from "../components/Seo";
+import GlobalContext from "../contexts/GlobalContext";
 
 const PLANNING = "planning";
 const PERMITTING = "permitting";
@@ -23,8 +23,6 @@ const INDUSTRIAL = "industrial";
 
 export default function PortfolioPage({ pageContent, projects }) {
   const { query, isReady } = useRouter();
-
-
 
   const services = [
     {
@@ -52,7 +50,7 @@ export default function PortfolioPage({ pageContent, projects }) {
   const [selectedService, setSelectedService] = useState(services[0]);
   const [isDropdownExpand, setDropdownExpand] = useState(false);
   const { pageTransitionTimeline } = useContext(TransitionContext);
-
+  const { setOpenDrawer } = useContext(GlobalContext);
   const toggleDropdown = () => {
     setDropdownExpand(!isDropdownExpand);
   };
@@ -235,7 +233,7 @@ export default function PortfolioPage({ pageContent, projects }) {
     let serviceId = parseInt(query?.serviceId);
     serviceId = isNaN(serviceId) ? 0 : serviceId;
     serviceId = serviceId >= services.length || serviceId < 0 ? 0 : serviceId;
-  
+
     setSelectedService(services[serviceId]);
     // codes using router.query
   }, [isReady]);
@@ -243,6 +241,17 @@ export default function PortfolioPage({ pageContent, projects }) {
   useIsomorphicLayoutEffect(() => {
     window.scrollTo({
       top: 0,
+    });
+
+    let $scrollToFooterElements = document.querySelectorAll(".js-scroll-to-footer");
+
+    $scrollToFooterElements.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("js-close-drawer")) {
+          setOpenDrawer(false);
+        }
+        document.querySelector("footer").scrollIntoView();
+      });
     });
 
     prepareAnimateOnLoad();
@@ -256,7 +265,6 @@ export default function PortfolioPage({ pageContent, projects }) {
     setSelectedService(service);
     scrollToTopContent();
   };
-
 
   const PlanServiceTabContent = ({ ...rest }) => {
     const { Header, Information } = pageContent.PortfolioPlanningAndDesign;
@@ -395,7 +403,6 @@ export default function PortfolioPage({ pageContent, projects }) {
       </div>
     );
   };
-
 
   return (
     <div className={styles.page}>
@@ -601,13 +608,9 @@ export default function PortfolioPage({ pageContent, projects }) {
 }
 
 export const getStaticProps = async ({ locale }) => {
-
   const pageContent = await fetchPortfoliPage(locale);
 
   const projects = await fetchProjects();
-
-
-
 
   return {
     props: {

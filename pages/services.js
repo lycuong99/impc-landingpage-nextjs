@@ -17,9 +17,7 @@ import { splitTextToLines } from "../lib/utils";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import { fetchServicePage } from "../services";
 import Seo from "../components/Seo";
-
-
-
+import GlobalContext from "../contexts/GlobalContext";
 
 const scroller = ".panel-wrapper";
 
@@ -228,7 +226,6 @@ const ServiceSlider = ({ sliderItems }) => {
     <div className="slider" ref={$slidersElementRef}>
       <div className="slider__images">
         {sliderItems.map((item, i) => {
-    
           return (
             <div
               key={item.Subheader}
@@ -349,6 +346,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function ServicesPage({ pageContent }) {
   const { pageTransitionTimeline } = useContext(TransitionContext);
+  const { setOpenDrawer } = useContext(GlobalContext);
   let scrollTriggerRef = useRef(null);
   const handleScroll = () => {
     let condition = scrollTriggerRef?.current.scrollTop > 50;
@@ -362,6 +360,16 @@ export default function ServicesPage({ pageContent }) {
   useIsomorphicLayoutEffect(() => {
     window.scrollTo({
       top: 0,
+    });
+    let $scrollToFooterElements = document.querySelectorAll(".js-scroll-to-footer");
+
+    $scrollToFooterElements.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.classList.contains("js-close-drawer")) {
+          setOpenDrawer(false);
+        }
+        document.querySelector("footer").scrollIntoView();
+      });
     });
 
     if (ScreenTracking.isOnLaptop()) {
