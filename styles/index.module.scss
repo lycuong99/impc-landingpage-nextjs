@@ -510,7 +510,6 @@
               flex-direction: row;
               align-items: baseline;
             }
-            
           }
           span {
             display: inline-block;
@@ -695,7 +694,7 @@
         position: relative;
 
         padding-bottom: 0;
-        min-height: 699px !important;
+        // min-height: 699px !important;
 
         background-color: $orange;
         $text-color: $white;
@@ -710,18 +709,19 @@
         @include md {
           grid-template: "a1 a2 .." "a3 a4 ..";
           grid-template-columns: 3fr 8fr 0fr;
-          row-gap: 80px;
+          // row-gap: 80px;
           max-height: unset;
         }
         @include lg {
           grid-template-columns: 3fr 8fr 0fr;
-          row-gap: 100px;
-          padding-top: 160px;
+          // row-gap: 100px;
+          padding-top: 128px;
         }
         @include xl {
           grid-template-columns: 3fr 8fr 1fr;
           grid-template-rows: 1fr 2fr;
-          row-gap: 160px;
+          // row-gap: 160px;
+          padding-top: 160px;
         }
 
         &__title {
@@ -807,11 +807,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding-bottom: 60px;
+            padding-bottom: 32px;
             gap: 56px;
 
             @include lg {
               gap: 0;
+              // padding-bottom: 72px;
             }
           }
 
@@ -830,6 +831,7 @@
           }
           .culture-line-process {
             justify-self: flex-end;
+            // align-self: flex-end;
             --value: 25%;
             position: relative;
             display: none;
@@ -1006,9 +1008,10 @@
           }
 
           @include lg {
-            flex: 7;
+            flex: 6;
           }
           @include xl {
+            flex: 7;
             // flex: 8;
           }
 
@@ -1161,7 +1164,7 @@
 
           transition: all 0.25s ease-in-out;
           background-color: white;
-
+          width: clamp(120px, 120px + 3vw + 3vh, 20vw);
           @include sm {
             // padding: 32px 12px;
           }
@@ -1172,10 +1175,10 @@
           }
           @include lg {
             // padding: 24px 60px;
-            width: 180px;
+            // width: 180px;
+            padding: 28px 32px;
           }
           @include xl {
-            width: clamp(200px, 160px + 4vw, 15vw);
             padding: 32px 40px;
           }
 

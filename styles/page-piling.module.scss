@@ -37,7 +37,7 @@
     .controller {
       position: fixed;
       right: 0;
-      top: 30vh;
+
       z-index: 20;
       display: none;
       border-top-left-radius: 2px;
@@ -45,6 +45,10 @@
 
       @include lg {
         display: block;
+        top: 26%;
+      }
+      @include xl {
+        // top: 30vh;
       }
 
       background-color: rgba(0, 0, 0, 0.1);
@@ -58,10 +62,14 @@
           text-align: center;
 
           color: $white;
-          padding: 20px 20px;
+          padding: 12px;
 
           transition: all 0.25s ease-in;
           cursor: pointer;
+
+          @include xl {
+            padding: 20px 20px;
+          }
 
           &:hover {
             color: $orange;

@@ -12,13 +12,10 @@ import headerStyles from "../components/header.module.scss";
 import GlobalContext from "../contexts/GlobalContext";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { TransitionContext } from "../components/PageLoader";
-
 import { splitTextToLines } from "../lib/utils";
-
 import { fetchHomepage } from "../services";
 import { useRouter } from "next/router";
 import useIsomorphicLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
-
 import Seo from "../components/Seo";
 
 const TOTAL_BANNER_IMAGES = 5;

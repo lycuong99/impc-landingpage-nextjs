@@ -54,11 +54,9 @@
 
         text-align: center;
         --overlap-height: 0;
-        @include lg {
-          --overlap-height: 100%;
-        }
+
         @include md {
-          padding-top: 160px;
+          padding-top: 20vh;
           height: calc(var(--vh, 1vh) * 50);
 
           &::after {
@@ -70,7 +68,12 @@
             background-color: var(--white);
           }
         }
-
+        @include lg {
+          --overlap-height: 100%;
+        }
+        @include xl {
+          padding-top: 22vh;
+        }
         &__background {
           position: absolute;
           height: 100%;
@@ -129,7 +132,7 @@
             position: -webkit-sticky;
             position: sticky;
             // border-top: 1px solid var(--grey-border);
-            top: 60px;
+            top: 56px;
 
             z-index: 10;
 
@@ -141,8 +144,11 @@
             @include md {
               width: 100%;
               margin-right: 0;
-              top: 72px;
+              top: 64px;
               padding: 0;
+            }
+            @include xl {
+              top: 71px;
             }
 
             &::before {
@@ -236,12 +242,16 @@
 
               @include md {
                 max-width: 25%;
-                height: 70px;
+                height: 64px;
               }
               @include lg {
                 flex: 1;
                 width: 25%;
                 font-size: 20px;
+                height: 64px;
+              }
+              @include xl {
+                height: 72px;
               }
 
               &::after {
@@ -1027,15 +1037,18 @@
           @include md {
             display: block;
             margin-bottom: 36px;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
             line-height: 34px;
           }
           @include lg {
             margin-bottom: 48px;
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 600;
             line-height: 36px;
+          }
+          @include xl {
+            font-size: 36px;
           }
         }
 

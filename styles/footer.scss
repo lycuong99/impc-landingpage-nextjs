@@ -18,13 +18,13 @@ footer {
 
   @include md {
     padding-right: 60px;
-    padding-top: 120px;
+    padding-top: 100px;
     padding-bottom: 56px;
     --gap: 40px;
   }
 
   @include lg {
-    padding-top: 120px;
+    padding-top: 80px;
     padding-right: 68px;
     padding-bottom: 24px;
   }

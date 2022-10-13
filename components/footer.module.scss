@@ -18,20 +18,22 @@
 
   @include md {
     padding-right: 60px;
-    padding-top: 120px;
+    padding-top: 86px;
     padding-bottom: 56px;
-    --gap: 40px;
+
   }
 
   @include lg {
-    padding-top: 120px;
+    padding-top: 100px;
     padding-right: 68px;
     padding-bottom: 24px;
+    --gap: 32px;
   }
 
   @include xl {
     padding-top: 120px;
     padding-right: 96px;
+    --gap: 40px;
   }
 
   :global {

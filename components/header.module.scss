@@ -20,6 +20,13 @@
   transition: all 0.4s ease-in-out;
 
   @include md {
+  }
+
+  @include lg {
+    padding: 16px 32px 16px var(--header-pading-left, 96px);
+  }
+
+  @include xl {
     padding: 20px 36px 16px var(--header-pading-left, 96px);
   }
 
@@ -38,13 +45,22 @@
 
   :global {
     .logo {
+      a {
+        display: flex;
+      }
       svg {
         transition: all 0.8s ease-in-out;
         color: var(--logo-color);
         height: 2em;
-        width: 110px;
+
         @include md {
           height: 40px;
+          width: 80px;
+        }
+
+        @include xl {
+          height: 40px;
+          width: 110px;
         }
       }
     }
@@ -128,6 +144,12 @@
 
       transition: all 0.3s ease-in-out;
       @include md {
+        height: 40px;
+        width: 40px;
+        gap: 6px;
+      }
+
+      @include xl {
         height: 48px;
         width: 48px;
         gap: 8px;
@@ -155,6 +177,10 @@
           --lineHamburgerTranslateY: 8px;
 
           @include md {
+            --lineHamburgerTranslateY: 8px;
+          }
+
+          @include xl {
             --lineHamburgerTranslateY: 10px;
           }
           &.top {
@@ -387,7 +413,7 @@
         @include lg {
           font-size: 24px;
           text-align: right;
-          line-height: 32px;
+          line-height: 1.44;
         }
 
         .line {
