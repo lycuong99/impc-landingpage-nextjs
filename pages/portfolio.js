@@ -337,7 +337,7 @@ export default function PortfolioPage({ pageContent, projects }) {
                 <span className="hint__text">Engineer’s Degree</span>
               </li>
               <li className="hint">
-                <span className="hint__color" style={{ backgroundColor: "var(--gray02)" }}></span>
+                <span className="hint__color" style={{ backgroundColor: "var(--white)" }}></span>
                 <span className="hint__text">Other</span>
               </li>
             </ul>

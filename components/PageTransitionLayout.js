@@ -91,7 +91,7 @@ const PageTransitionLayout = ({ children }) => {
   };
   const openLoading = ($jsLoading) => {
     gsap.set("html", { height: "100vh" });
-    console.log($jsLoading);
+    // console.log($jsLoading);
     gsap.set($jsLoading, { display: "block", y: "100vh", opacity: 1 });
     return gsap.to($jsLoading, {
       y: 0,

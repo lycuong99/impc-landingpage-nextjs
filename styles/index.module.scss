@@ -461,14 +461,26 @@
           align-items: center;
           gap: 36px;
 
+          @include md {
+          }
           @include lg {
             flex-direction: row;
-            align-items: flex-start;
+            align-items: stretch;
+            gap: 20px;
           }
         }
         &__item {
           display: flex;
           flex-direction: column;
+
+          @include lg {
+            flex: 1;
+            justify-content: space-between;
+          }
+
+          @include xl {
+            max-height: 10em;
+          }
 
           h2 {
             text-align: center;
@@ -488,6 +500,17 @@
             justify-content: center;
             align-items: baseline;
             gap: 8px;
+
+            @include lg {
+              flex-direction: column;
+              align-items: center;
+            }
+
+            @include xl {
+              flex-direction: row;
+              align-items: baseline;
+            }
+            
           }
           span {
             display: inline-block;

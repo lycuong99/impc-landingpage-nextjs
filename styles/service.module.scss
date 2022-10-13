@@ -289,7 +289,14 @@
             flex: 2;
             flex-direction: column-reverse;
             justify-content: space-between;
+
+            gap: 16px;
+
             min-height: 66vh;
+            padding: 40px 40px 32px var(--header-pading-left);
+          }
+
+          @include xl {
             padding: 48px 48px 40px var(--header-pading-left);
           }
 
@@ -353,13 +360,19 @@
 
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 20px;
           // visibility: hidden;
 
           @include sm {
             // height: 400px;
           }
           @include lg {
+            // gap: 2em;
+
+            // height: 600px;
+          }
+
+          @include xl {
             gap: 36px;
 
             // height: 600px;
@@ -424,6 +437,14 @@
 
           @include md {
             padding-bottom: 12px;
+            margin-bottom: 24px;
+          }
+
+          @include lg {
+            margin-bottom: 28px;
+          }
+
+          @include xl {
             margin-bottom: 36px;
           }
 
@@ -477,7 +498,7 @@
 
         &__body {
           flex: 1;
-          padding-bottom: 1em;
+          padding-bottom: 0.5em;
         }
 
         &__container {
