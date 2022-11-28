@@ -205,13 +205,7 @@ const Header = () => {
       <div className="logo">
         <Link href="/">
           <a className="js-link">
-            <svg
-              width="162"
-              height="48"
-              viewBox="0 0 162 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="162" height="48" viewBox="0 0 162 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M12.8168 11.572V1.04688H3.10993C1.39396 1.04688 0 2.44398 0 4.17333V11.572H12.8168Z"
                 fill="#EC8922"
@@ -252,24 +246,23 @@ const Header = () => {
         ref={(el) => ($navDrawer = el)}
         id="nav-drawer"
         aria-hidden="true"
-        aria-label="Navigation Drawer"
-      >
+        aria-label="Navigation Drawer">
         <ol>
-          <li className="active">
+          <li className={`${router.route === Navigation.HomepageURL && "active"}`}>
             <Link href={Navigation.HomepageURL}>
               <a className="navigation-text-xl">
                 <span>{Navigation.HomepageTitle}</span>
               </a>
             </Link>
           </li>
-          <li>
+          <li className={`${router.route === Navigation.ServiceURL && "active"}`}>
             <Link href={Navigation.ServiceURL}>
               <a className="navigation-text-xl js-link">
                 <span>{Navigation.ServiceTitle}</span>
               </a>
             </Link>
           </li>
-          <li>
+          <li className={`${router.route === Navigation.PortfolioURL && "active"}`}>
             <Link href={Navigation.PortfolioURL}>
               <a className="navigation-text-xl js-link">
                 <span>{Navigation.PortfolioTitle}</span>
@@ -287,13 +280,7 @@ const Header = () => {
         </div>
 
         <span className="drawer__logo">
-          <svg
-            width="62"
-            height="221"
-            viewBox="0 0 62 221"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="62" height="221" viewBox="0 0 62 221" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g opacity="0.3">
               <path
                 d="M62.0001 50.7273V0H15.5632C7.35414 0 0.685547 6.73353 0.685547 15.0683V50.7273H62.0001Z"
@@ -308,9 +295,7 @@ const Header = () => {
         </span>
 
         <div className="contact">
-          <span className="navigation-text-xl js-scroll-to-footer js-close-drawer">
-            {ContactTitle}
-          </span>
+          <span className="navigation-text-xl js-scroll-to-footer js-close-drawer">{ContactTitle}</span>
           <div className="drawer__bottom-line"></div>
         </div>
       </div>
@@ -321,8 +306,7 @@ const Header = () => {
           handleHamburgerBtnClick();
         }}
         className={`hamburger ${isOpenDrawer ? "hamburger--close" : ""}`}
-        title="hamburger-btn"
-      >
+        title="hamburger-btn">
         <span className="top"></span>
         <span className="middle"></span>
         <span className="bot"></span>

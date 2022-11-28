@@ -518,8 +518,8 @@ export default function PortfolioPage({ pageContent, projects }) {
 
               <section className="outwork">
                 <div className="header">
-                  <h2>OUR WORK </h2>
-                  <h1 id="workHeader">PLANNING AND DESIGN</h1>
+                  <h2>{pageContent.ProjectTitle}</h2>
+                  <h1 id="workHeader">{selectedService.workTitle}</h1>
                 </div>
                 <div className="grid" id="workGrid">
                   {projects

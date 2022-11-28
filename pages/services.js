@@ -46,17 +46,11 @@ const ServiceSlider = ({ sliderItems }) => {
     let $currentSlider = $slidersElement.querySelector(".slider__content.active");
     let currentSliderIndex = parseInt($currentSlider.dataset.sliderIndex);
     let nextSliderIndex = currentSliderIndex === TOTAL_PLAN_SLIDER ? 1 : currentSliderIndex + 1;
-    let $nextSliderElement = $slidersElement.querySelector(
-      `.slider__content[data-slider-index="${nextSliderIndex}"]`
-    );
+    let $nextSliderElement = $slidersElement.querySelector(`.slider__content[data-slider-index="${nextSliderIndex}"]`);
     let $currentImageElement = $slidersElement.querySelector(".slider__image.active");
 
-    let $nextImageWrapper = $slidersElement.querySelector(
-      `.slider__image[data-slider-index="${nextSliderIndex}"]`
-    );
-    let $nextImage = $slidersElement.querySelector(
-      `.slider__image[data-slider-index="${nextSliderIndex}"] img`
-    );
+    let $nextImageWrapper = $slidersElement.querySelector(`.slider__image[data-slider-index="${nextSliderIndex}"]`);
+    let $nextImage = $slidersElement.querySelector(`.slider__image[data-slider-index="${nextSliderIndex}"] img`);
     let $nextImageOverlap = $slidersElement.querySelector(
       `.slider__image[data-slider-index="${nextSliderIndex}"] .slider__image-overlap`
     );
@@ -134,18 +128,14 @@ const ServiceSlider = ({ sliderItems }) => {
     let $currentSlider = $slidersElement.querySelector(".slider__content.active");
     let currentSliderIndex = parseInt($currentSlider.dataset.sliderIndex);
     let prevSliderIndex = currentSliderIndex === 1 ? TOTAL_PLAN_SLIDER : currentSliderIndex - 1;
-    let $prevSliderElement = $slidersElement.querySelector(
-      `.slider__content[data-slider-index="${prevSliderIndex}"]`
-    );
+    let $prevSliderElement = $slidersElement.querySelector(`.slider__content[data-slider-index="${prevSliderIndex}"]`);
 
     // CURRENT IMAGE
     let $currentImageWrapper = $slidersElement.querySelector(".slider__image.active");
     let $currentImage = $currentImageWrapper.querySelector(`img`);
 
     // PREV IMG
-    let $prevImageElement = $slidersElement.querySelector(
-      `.slider__image[data-slider-index="${prevSliderIndex}"]`
-    );
+    let $prevImageElement = $slidersElement.querySelector(`.slider__image[data-slider-index="${prevSliderIndex}"]`);
 
     // ANIMATE CONTENT
     gsap.fromTo(
@@ -228,11 +218,7 @@ const ServiceSlider = ({ sliderItems }) => {
       <div className="slider__images">
         {sliderItems.map((item, i) => {
           return (
-            <div
-              key={item.Subheader}
-              className={`slider__image ${i === 0 ? "active" : ""}`}
-              data-slider-index={i + 1}
-            >
+            <div key={item.Subheader} className={`slider__image ${i === 0 ? "active" : ""}`} data-slider-index={i + 1}>
               <img src={item.Image?.url} loading="lazy" alt="" />
               <div className="slider__image-overlap"></div>
             </div>
@@ -249,35 +235,15 @@ const ServiceSlider = ({ sliderItems }) => {
           </div>
           <div className="slider__nav">
             <button className="prev" onClick={handlePrevClick}>
-              <svg
-                width="33"
-                height="14"
-                viewBox="0 0 33 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="33" height="14" viewBox="0 0 33 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32.5 7.65479L2.55336 7.65478" stroke="currentColor" strokeWidth="2" />
-                <path
-                  d="M8.10156 13.2007L2.00132 7.65501L8.10156 1.0002"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
+                <path d="M8.10156 13.2007L2.00132 7.65501L8.10156 1.0002" stroke="currentColor" strokeWidth="2" />
               </svg>
             </button>
             <button className="next" onClick={handleNextClick}>
-              <svg
-                width="32"
-                height="14"
-                viewBox="0 0 32 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="32" height="14" viewBox="0 0 32 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 7.65479L29.9466 7.65478" stroke="currentColor" strokeWidth="2" />
-                <path
-                  d="M24.3984 13.2007L30.4987 7.65501L24.3984 1.0002"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
+                <path d="M24.3984 13.2007L30.4987 7.65501L24.3984 1.0002" stroke="currentColor" strokeWidth="2" />
               </svg>
             </button>
           </div>
@@ -285,11 +251,7 @@ const ServiceSlider = ({ sliderItems }) => {
 
         <div className="slider__contents">
           {sliderItems.map((item, i) => (
-            <div
-              key={item.Subheader}
-              className={`slider__content ${i == 0 ? "active" : 1}`}
-              data-slider-index={i + 1}
-            >
+            <div key={item.Subheader} className={`slider__content ${i == 0 ? "active" : 1}`} data-slider-index={i + 1}>
               <div className="sub-header2">{item.Subheader}</div>
               <h2>{item.Header}</h2>
               <p>{item.Description}</p>
@@ -317,18 +279,8 @@ const SectionHeader = ({ headerText, portfolioLink }) => {
         <a className="portfolio-navigation js-link">
           <h2>PORTFOLIO</h2>
           <span>
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 23.4357L23 1.8623M23 1.8623H12.9429M23 1.8623V10.6083"
-                stroke="#EC8922"
-                strokeWidth="2"
-              />
+            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 23.4357L23 1.8623M23 1.8623H12.9429M23 1.8623V10.6083" stroke="#EC8922" strokeWidth="2" />
             </svg>
           </span>
         </a>
@@ -445,6 +397,7 @@ export default function ServicesPage({ pageContent }) {
       "--bottom-line-width": 0,
       // x: "-100%",
     });
+
     gsap.set(`.${sectionClassName} .service-section__header svg path`, {
       strokeDasharray: "1000",
       strokeDashoffset: "1000",
@@ -464,8 +417,13 @@ export default function ServicesPage({ pageContent }) {
       {
         y: 100,
         opacity: 0,
-        ease: Power2.easeInOut,
+        // ease: Power2.easeInOut,
       },
+      // {
+      //   y: 0,
+      //   opacity: 1,
+      //   ease: Power2.easeInOut,
+      // },
       "<"
     );
 
@@ -783,8 +741,7 @@ and local regulations.`,
     },
     permitting: {
       header: "PERMITTING",
-      header2:
-        "Construction-related permitting services are initiated at an early stage of the project.",
+      header2: "Construction-related permitting services are initiated at an early stage of the project.",
       paragraph:
         "IMPC is an Industrial Estate Management service provider with experience in managing facility services that can drive and demonstrate a significant reduction in the cost of operating the facility while maintaining or improving the quality and level of Investor service.",
       imgURL: "/assets/images/services/permitting.webp",
@@ -871,8 +828,7 @@ YOUR BUSINESS`;
     <div
       className={styles.page}
       // className="smooth-scroll"
-      data-scroll-container
-    >
+      data-scroll-container>
       <Seo Seo={pageContent.Seo} />
 
       <Header />
@@ -902,13 +858,7 @@ YOUR BUSINESS`;
             </div>
             <div className="banner__content">
               <div className="quote-icon">
-                <svg
-                  width="73"
-                  height="58"
-                  viewBox="0 0 73 58"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="73" height="58" viewBox="0 0 73 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M0 33.6195L17.1269 0H31.4462L19.6538 30.7965H29.7615V58H0V33.6195ZM41.5538 33.6195L58.6808 0H73L61.2077 30.7965H71.3154V58H41.5538V33.6195Z"
                     fill="#0546B4"
@@ -925,8 +875,7 @@ YOUR BUSINESS`;
         <ServiceSection id="planAndDesign" className="plan-and-design scroll-panel">
           <ServiceSection.Header
             headerText={pageContent.PlanningAndDesign.Header}
-            portfolioLink={"/portfolio/?serviceId=0"}
-          ></ServiceSection.Header>
+            portfolioLink={"/portfolio/?serviceId=0"}></ServiceSection.Header>
           <ServiceSection.Body>
             <ServiceSlider sliderItems={pageContent.PlanningAndDesign.SliderItems}></ServiceSlider>
           </ServiceSection.Body>
@@ -935,15 +884,10 @@ YOUR BUSINESS`;
         <ServiceSection id="permitting" className="permitting scroll-panel">
           <ServiceSection.Header
             headerText={pageContent.Permitting.Header}
-            portfolioLink={"/portfolio/?serviceId=1"}
-          ></ServiceSection.Header>
+            portfolioLink={"/portfolio/?serviceId=1"}></ServiceSection.Header>
           <ServiceSection.Body className="service-section__container">
             <div className="service__image left">
-              <img
-                src={pageContent.Permitting.Content.Image?.url}
-                loading="lazy"
-                alt="permitting"
-              />
+              <img src={pageContent.Permitting.Content.Image?.url} loading="lazy" alt="permitting" />
             </div>
             <div className="service-section__content">
               <div className="background bg-lazy"></div>
@@ -964,20 +908,16 @@ YOUR BUSINESS`;
         <ServiceSection className="project scroll-panel">
           <ServiceSection.Header
             headerText={pageContent.ProjectAndConstructionManagement.Header}
-            portfolioLink={"/portfolio/?serviceId=2"}
-          ></ServiceSection.Header>
+            portfolioLink={"/portfolio/?serviceId=2"}></ServiceSection.Header>
           <ServiceSection.Body>
-            <ServiceSlider
-              sliderItems={pageContent.ProjectAndConstructionManagement.SliderItems}
-            ></ServiceSlider>
+            <ServiceSlider sliderItems={pageContent.ProjectAndConstructionManagement.SliderItems}></ServiceSlider>
           </ServiceSection.Body>
         </ServiceSection>
 
         <ServiceSection id="industrial" className="industrial scroll-panel">
           <ServiceSection.Header
             headerText={pageContent.IndustrialEstateManagement.Header}
-            portfolioLink={"/portfolio/?serviceId=3"}
-          ></ServiceSection.Header>
+            portfolioLink={"/portfolio/?serviceId=3"}></ServiceSection.Header>
           <ServiceSection.Body>
             <div className="service-section__container service-section__container--reverse">
               <div className="service__image">
@@ -991,15 +931,13 @@ YOUR BUSINESS`;
               </div>
               <div className="service-section__content">
                 <div className="background bg-lazy"></div>
-                <div className="sub-header2">{content.industrial.header}</div>
+                <div className="sub-header2">{pageContent.IndustrialEstateManagement.Content.Subheader}</div>
                 <h2>
-                  {splitTextToLines(pageContent.IndustrialEstateManagement.Content.Header).map(
-                    (line) => (
-                      <div className="line" key={line}>
-                        <span>{line}</span>
-                      </div>
-                    )
-                  )}
+                  {splitTextToLines(pageContent.IndustrialEstateManagement.Content.Header).map((line) => (
+                    <div className="line" key={line}>
+                      <span>{line}</span>
+                    </div>
+                  ))}
                 </h2>
 
                 <p>{pageContent.IndustrialEstateManagement.Content.Description}</p>

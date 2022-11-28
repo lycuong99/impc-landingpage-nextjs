@@ -28,9 +28,7 @@ const slideBannerImage = () => {
 
   // GET NEXT IMAGE
   let nextIndex = indexImg === TOTAL_BANNER_IMAGES - 1 ? 0 : indexImg + 1;
-  let nextImg = document.querySelector(
-    `.banner__image .img-wrapper[data-banner-img-index="${nextIndex}"]`
-  );
+  let nextImg = document.querySelector(`.banner__image .img-wrapper[data-banner-img-index="${nextIndex}"]`);
 
   const base_zIndex = 1;
 
@@ -64,9 +62,7 @@ const slideBannerImage = () => {
   // ANIMATION FOR TEXT
 
   gsap.fromTo(
-    document.querySelectorAll(
-      `.banner__img-title .text-overlap-transform[data-banner-img-index="${nextIndex}"] .line span`
-    ),
+    document.querySelectorAll(`.banner__img-title .text-overlap-transform[data-banner-img-index="${nextIndex}"] .line span`),
     {
       y: "100%",
       ease: Cubic.easeInOut,
@@ -85,9 +81,7 @@ const slideBannerImage = () => {
   );
 
   gsap.fromTo(
-    document.querySelectorAll(
-      `.banner__img-title .text-overlap-transform[data-banner-img-index="${indexImg}"] .line span`
-    ),
+    document.querySelectorAll(`.banner__img-title .text-overlap-transform[data-banner-img-index="${indexImg}"] .line span`),
     {
       y: 0,
       ease: Cubic.easeInOut,
@@ -107,11 +101,7 @@ const slideBannerImage = () => {
   // ANIAMTION FOR H1
   if (indexImg === 0 || indexImg === TOTAL_BANNER_IMAGES - 1) {
     gsap.fromTo(
-      document.querySelectorAll(
-        `.banner__title .text-overlap-transform-wrapper .text-overlap-transform[data-banner-img-index="${
-          indexImg === 0 ? 0 : 1
-        }"] .line span`
-      ),
+      document.querySelectorAll(`.banner__title .text-overlap-transform-wrapper .text-overlap-transform[data-banner-img-index="${indexImg === 0 ? 0 : 1}"] .line span`),
       {
         y: 0,
         ease: Cubic.easeInOut,
@@ -129,11 +119,7 @@ const slideBannerImage = () => {
     );
 
     gsap.fromTo(
-      document.querySelectorAll(
-        `.banner__title .text-overlap-transform-wrapper .text-overlap-transform[data-banner-img-index="${
-          indexImg === 0 ? 1 : 0
-        }"] .line span`
-      ),
+      document.querySelectorAll(`.banner__title .text-overlap-transform-wrapper .text-overlap-transform[data-banner-img-index="${indexImg === 0 ? 1 : 0}"] .line span`),
       {
         y: "100%",
         ease: Cubic.easeInOut,
@@ -170,12 +156,7 @@ const SectionAnimations = {
       const tl = gsap.timeline();
 
       tl.fromTo(
-        [
-          document.querySelectorAll(".banner .banner__title h3 .line span"),
-          document.querySelectorAll(
-            ".banner__title h1.text-overlap-transform-wrapper .text-overlap-transform--base .line span"
-          ),
-        ],
+        [document.querySelectorAll(".banner .banner__title h3 .line span"), document.querySelectorAll(".banner__title h1.text-overlap-transform-wrapper .text-overlap-transform--base .line span")],
         {
           y: "100%",
           ease: Power0.easeInOut,
@@ -256,7 +237,7 @@ const SectionAnimations = {
           },
           { once: true }
         );
-      }, 2000);
+      }, 5000);
     },
     out: () => {
       document.getElementById("header").classList.remove(headerStyles["header--transparent"]);
@@ -604,9 +585,7 @@ const SectionAnimations = {
       });
     },
     out: () => {
-      document
-        .getElementById("header")
-        .classList.remove(headerStyles["header--footer-transparent"]);
+      document.getElementById("header").classList.remove(headerStyles["header--footer-transparent"]);
     },
   },
   getSection: (index) => {
@@ -632,36 +611,15 @@ const SectionAnimations = {
 };
 
 const AchievementSection = ({ pageContent }) => {
-  const {
-    Quote,
-    TotalProjectTitle,
-    TotalProjectValue,
-    TotalProjectUnit,
-    TotalPartnerAndCustomerTitle,
-    TotalPartnerAndCustomerValue,
-    TotalPartnerAndCustomerUnit,
-    TotalEmployeeTitle,
-    TotalEmployeeValue,
-    TotalEmployeeUnit,
-    PortfolioBtn,
-    Description,
-  } = pageContent.HomeAchivement;
+  const { Quote, TotalProjectTitle, TotalProjectValue, TotalProjectUnit, TotalPartnerAndCustomerTitle, TotalPartnerAndCustomerValue, TotalPartnerAndCustomerUnit, TotalEmployeeTitle, TotalEmployeeValue, TotalEmployeeUnit, PortfolioBtn, Description } = pageContent.HomeAchivement;
   return (
     <section className="section achievement">
       <div className="achievement__quote">
         <div className="quote-icon-wrapper">
           <div className="left-line"></div>
           <span>
-            <svg
-              className="quote-icon"
-              viewBox="0 0 50 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M41.6274 32H24.6462L35.1415 0H50L41.6274 32ZM16.8632 32H0L10.7311 0H25.5896L16.8632 32Z"
-                fill="currentColor"
-              />
+            <svg className="quote-icon" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M41.6274 32H24.6462L35.1415 0H50L41.6274 32ZM16.8632 32H0L10.7311 0H25.5896L16.8632 32Z" fill="currentColor" />
             </svg>
           </span>
           <div className="right-line"></div>
@@ -705,12 +663,7 @@ const AchievementSection = ({ pageContent }) => {
           <Link href="/portfolio">
             <a className="button js-link">
               <span>{PortfolioBtn}</span>
-              <img
-                src="/assets/icons/arrow-right.svg"
-                loading="lazy"
-                alt="right arrow icon"
-                layout="fill"
-              />
+              <img src="/assets/icons/arrow-right.svg" loading="lazy" alt="right arrow icon" layout="fill" />
             </a>
           </Link>
         </div>
@@ -740,10 +693,7 @@ const CultureSection = ({ content }) => {
       let $cultureSliderContents = document.querySelectorAll(".culture-slider__content");
 
       $cultureSliderContents.forEach((slide) => {
-        if (
-          slide.classList.contains("active") ||
-          parseInt(slide.dataset.cultureIndex) === targetIndex
-        ) {
+        if (slide.classList.contains("active") || parseInt(slide.dataset.cultureIndex) === targetIndex) {
           slide.classList.toggle("active");
         }
       });
@@ -772,50 +722,20 @@ const CultureSection = ({ content }) => {
             <div className="culture-slider__controller">
               <button className="prev" onClick={handleClickPrevCultureBtn}>
                 <span>
-                  <svg
-                    width="23"
-                    height="23"
-                    viewBox="0 0 23 23"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="11.5" cy="11.5" r="10.5" stroke="#fff" strokeWidth="2" />
-                    <path
-                      d="M14 7L8 11.3784L14 16"
-                      stroke="#fff"
-                      strokeWidth="2"
-                      strokeLinejoin="bevel"
-                    />
+                    <path d="M14 7L8 11.3784L14 16" stroke="#fff" strokeWidth="2" strokeLinejoin="bevel" />
                   </svg>
                 </span>
               </button>
               <div>
-                <span className="culture-current-index">{`0${currentIndex}`}</span>/
-                <span className="culture-total">03</span>
+                <span className="culture-current-index">{`0${currentIndex}`}</span>/<span className="culture-total">03</span>
               </div>
               <button className="next" onClick={handleClickNextCultureBtn}>
                 <span>
-                  <svg
-                    width="23"
-                    height="23"
-                    viewBox="0 0 23 23"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="11.5"
-                      cy="11.5"
-                      r="10.5"
-                      transform="rotate(-180 11.5 11.5)"
-                      stroke="#fff"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M9 16L15 11.6216L9 7"
-                      stroke="#fff"
-                      strokeWidth="2"
-                      strokeLinejoin="bevel"
-                    />
+                  <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11.5" cy="11.5" r="10.5" transform="rotate(-180 11.5 11.5)" stroke="#fff" strokeWidth="2" />
+                    <path d="M9 16L15 11.6216L9 7" stroke="#fff" strokeWidth="2" strokeLinejoin="bevel" />
                   </svg>
                 </span>
               </button>
@@ -823,11 +743,7 @@ const CultureSection = ({ content }) => {
 
             {CultureSliderContent.map((data, index) => {
               return (
-                <div
-                  className={`culture-slider__content ${index === 0 ? "active" : ""}`}
-                  data-culture-index={index + 1}
-                  key={data.id}
-                >
+                <div className={`culture-slider__content ${index === 0 ? "active" : ""}`} data-culture-index={index + 1} key={data.id}>
                   <span className="subtitle--small">{data?.Title}</span>
                   <div className="content-wrapper">
                     {splitTextToLines(data.Statement).length <= 1 ? (
@@ -883,16 +799,8 @@ const CultureSection = ({ content }) => {
       <div className="culture__logo">
         <svg id="culture-svg" viewBox="0 0 140 502" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g opacity="0.2">
-            <path
-              d="M33.7525 5.71191H134.102V111.748H5V35.18C5 18.781 17.9842 5.71191 33.7525 5.71191Z"
-              stroke="white"
-              strokeWidth="10"
-            />
-            <path
-              d="M105.339 496.797H5V152.264H134.102V467.637C134.102 483.784 121.194 496.797 105.339 496.797Z"
-              stroke="white"
-              strokeWidth="10"
-            />
+            <path d="M33.7525 5.71191H134.102V111.748H5V35.18C5 18.781 17.9842 5.71191 33.7525 5.71191Z" stroke="white" strokeWidth="10" />
+            <path d="M105.339 496.797H5V152.264H134.102V467.637C134.102 483.784 121.194 496.797 105.339 496.797Z" stroke="white" strokeWidth="10" />
           </g>
         </svg>
       </div>
@@ -944,14 +852,7 @@ const TeamSection = ({ content }) => {
       </div>
       <div className="team__image">
         <figure>
-          <img
-            className="main-img"
-            style={{ height: "100%" }}
-            height="200px"
-            src={TeamImage.url}
-            alt="Out team"
-            layout="fill"
-          />
+          <img className="main-img" style={{ height: "100%" }} height="200px" src={TeamImage.url} alt="Out team" layout="fill" />
         </figure>
       </div>
     </section>
@@ -986,47 +887,26 @@ const PartnerSection = ({ content }) => {
 
 const BannerSection = ({ pageContent }) => {
   const locale = useRouter().locale;
-  const {
-    Subheader,
-    Header1,
-    Header2,
-    ContactButton,
-    BackgroundImage,
-    ServiceLinkTitle,
-    HomeBannerServiceSliders,
-    DefaultSlideImage,
-  } = pageContent.HomeBanner;
+  const { Subheader, Header1, Header2, ContactButton, BackgroundImage, ServiceLinkTitle, HomeBannerServiceSliders, DefaultSlideImage } = pageContent.HomeBanner;
 
   return (
     <section className={"banner section section--active"} id="banner">
-      <div
-        className="banner__background bg-lazy"
-        style={{ backgroundImage: `url("${BackgroundImage.url}")` }}
-      ></div>
+      <div className="banner__background bg-lazy" style={{ backgroundImage: `url("${BackgroundImage.url}")` }}></div>
       <div className="banner__title">
         <h3>
           <div className="line">
             <span>{Subheader}</span>
           </div>
         </h3>
-        <h1
-          className="text-overlap-transform-wrapper"
-          style={locale === "vi" ? { "--lh-xs": 1.5 } : undefined}
-        >
-          <div
-            className="text-overlap-transform text-overlap-transform--base"
-            data-banner-img-index="0"
-          >
+        <h1 className="text-overlap-transform-wrapper" style={locale === "vi" ? { "--lh-xs": 1.5 } : undefined}>
+          <div className="text-overlap-transform text-overlap-transform--base" data-banner-img-index="0">
             {splitTextToLines(Header1).map((line) => (
               <div className="line" key={line}>
                 <span>{line}</span>
               </div>
             ))}
           </div>
-          <div
-            className="text-overlap-transform text-overlap-transform--other"
-            data-banner-img-index="1"
-          >
+          <div className="text-overlap-transform text-overlap-transform--other" data-banner-img-index="1">
             {splitTextToLines(Header2).map((line) => (
               <div className="line" key={line}>
                 <span>{line}</span>
@@ -1051,14 +931,7 @@ const BannerSection = ({ pageContent }) => {
           <a className="button--link js-link">
             {ServiceLinkTitle}
             <span>
-              <svg
-                className="icon"
-                width="22"
-                height="12"
-                viewBox="0 0 22 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg className="icon" width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 6L21 6" stroke="currentColor" />
                 <path d="M16 1L21 6L16 11" stroke="currentColor" />
               </svg>{" "}
@@ -1073,10 +946,7 @@ const BannerSection = ({ pageContent }) => {
       <div className="banner__hero">
         <div className="img-overlap"></div>
         <div className="banner__img-title sub-header2">
-          <div
-            className="text-overlap-transform text-overlap-transform--base"
-            data-banner-img-index="0"
-          >
+          <div className="text-overlap-transform text-overlap-transform--base" data-banner-img-index="0">
             <div className="line">
               <span></span>
             </div>
@@ -1111,17 +981,7 @@ const BannerSection = ({ pageContent }) => {
           {HomeBannerServiceSliders.map(({ ImageURL, Title }, index) => {
             return (
               <div className="img-wrapper" key={index} data-banner-img-index={index + 1}>
-                <Image
-                  objectFit="cover"
-                  className="slider__img lazy-img"
-                  placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  src={ImageURL?.url}
-                  alt={Title}
-                  layout="fill"
-                  loading="eager"
-                  height={"100%"}
-                  width={"100%"}
-                />
+                <Image objectFit="cover" className="slider__img lazy-img" placeholder="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" src={ImageURL?.url} alt={Title} layout="fill" loading="eager" height={"100%"} width={"100%"} />
               </div>
             );
           })}
